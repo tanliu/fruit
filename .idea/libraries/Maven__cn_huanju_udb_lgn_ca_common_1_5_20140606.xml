@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cn.huanju.udb.lgn:ca-common:1.5-20140606">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/ca-common/1.5-20140606/ca-common-1.5-20140606.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/ca-common/1.5-20140606/ca-common-1.5-20140606-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/ca-common/1.5-20140606/ca-common-1.5-20140606-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

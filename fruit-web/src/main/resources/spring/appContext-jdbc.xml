@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+	<!-- ===================================== -->
+	<!-- For dao, jdbc connections, datasource -->
+	<!-- ===================================== -->
+
+	<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+		destroy-method="close">
+		<property name="maxPoolSize" value="2" />
+		<property name="minPoolSize" value="2" />
+		<property name="maxIdleTime" value="500" />
+		<property name="initialPoolSize" value="1" />
+		<property name="jdbcUrl" value="${db.url}" />
+		<property name="user" value="${db.username}" />
+		<property name="checkoutTimeout" value="3000" />
+		<property name="password" value="${db.password}" />
+		<property name="acquireRetryAttempts" value="5" />		<!-- 重试次数 -->
+		<property name="acquireRetryDelay" value="1000" />		<!-- 重试间隔 -->
+		<property name="breakAfterAcquireFailure" value="false" />	<!-- 重试进行数据库异常恢复 -->
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+	</bean>
+	
+	<!-- tx manager -->
+	<!-- 
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"/>
+	<tx:annotation-driven />
+	-->
+</beans>
+

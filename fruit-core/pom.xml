@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<parent>
+		<artifactId>fruit</artifactId>
+		<groupId>com.yy.fruit</groupId>
+		<version>1.0-SNAPSHOT</version>
+	</parent>
+	
+	<groupId>com.yy.fruit</groupId>
+	<artifactId>fruit-core</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>jar</packaging>
+	<name>fruit-core</name>
+	<modelVersion>4.0.0</modelVersion>
+	<description>fruit core project</description>
+
+	<properties>
+	</properties>
+
+	<dependencies>
+
+	</dependencies>
+
+	<build>
+		<pluginManagement>
+		</pluginManagement>
+		<plugins>
+		</plugins>
+	</build>
+
+	<profiles>
+	</profiles>
+</project>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.fruit.entity.User" table="tb_sys_user" catalog="elecrecord">
+        <id name="userId" type="java.lang.String">
+            <column name="user_id" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <many-to-one name="organization" class="com.fruit.entity.Organization" lazy="false" fetch="select">
+            <column name="org_id" length="32">
+                <comment>标识ID</comment>
+            </column>
+        </many-to-one>
+        <property name="employNo" type="java.lang.String">
+            <column name="employ_no" length="10">
+                <comment>用户编号</comment>
+            </column>
+        </property>
+        <property name="employName" type="java.lang.String">
+            <column name="employ_name" length="64">
+                <comment>用户名称</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="create_time" length="19">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="sex" type="java.lang.Integer">
+            <column name="sex">
+                <comment>性别 0-男 1-女</comment>
+            </column>
+        </property>
+        <property name="tell" type="java.lang.String">
+            <column name="tell" length="20">
+                <comment>联系电话</comment>
+            </column>
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status">
+                <comment>状态 0-启用 1-禁用</comment>
+            </column>
+        </property>
+        <property name="address" type="java.lang.String">
+            <column name="address" length="200">
+                <comment>联系地址</comment>
+            </column>
+        </property>
+        <property name="email" type="java.lang.String">
+            <column name="email" length="50">
+                <comment>电子邮箱</comment>
+            </column>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="50">
+                <comment>密码</comment>
+            </column>
+        </property>
+        <property name="userType" type="java.lang.String">
+            <column name="user_type" length="2">
+                <comment>用户类型</comment>
+            </column>
+        </property>
+         <set name="userRoles" inverse="false" lazy="false" cascade="delete" >
+            <key>
+                <column name="user_id" length="32">
+                    <comment>标识ID</comment>
+                </column>
+            </key>
+            <one-to-many class="com.fruit.entity.UserRole" />
+        </set> 
+    </class>
+</hibernate-mapping>

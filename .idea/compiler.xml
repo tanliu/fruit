@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="authority-core" />
+        <module name="authority-web" />
+        <module name="base-core" />
+        <module name="fruit-core" />
+        <module name="fruit-core (1)" />
+        <module name="fruit-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="authority-core" target="1.7" />
+      <module name="authority-web" target="1.7" />
+      <module name="base-core" target="1.7" />
+      <module name="fruit" target="1.7" />
+      <module name="fruit-core" target="1.7" />
+      <module name="fruit-core (1)" target="1.7" />
+      <module name="fruit-web" target="1.7" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: cn.huanju.udb.lgn:oauth:20100601.20121112">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/oauth/20100601.20121112/oauth-20100601.20121112.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/oauth/20100601.20121112/oauth-20100601.20121112-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/cn/huanju/udb/lgn/oauth/20100601.20121112/oauth-20100601.20121112-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
