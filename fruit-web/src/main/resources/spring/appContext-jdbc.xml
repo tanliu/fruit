@@ -18,17 +18,19 @@
 	<!-- For dao, jdbc connections, datasource -->
 	<!-- ===================================== -->
 
-	<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close">
-		<property name="maxPoolSize" value="2" />
-		<property name="minPoolSize" value="2" />
+		<property name="maxPoolSize" value="30" />
+		<property name="minPoolSize" value="10" />
 		<property name="maxIdleTime" value="500" />
-		<property name="initialPoolSize" value="1" />
-		<property name="jdbcUrl" value="${db.url}" />
-		<property name="user" value="${db.username}" />
-		<property name="checkoutTimeout" value="3000" />
-		<property name="password" value="${db.password}" />
-		<property name="acquireRetryAttempts" value="5" />		<!-- 重试次数 -->
+		<property name="autoCommitOnClose" value="true"/>
+		<property name="initialPoolSize" value="5" />
+		<property name="jdbcUrl"
+				  value="jdbc:mysql://${jdbc.base.fruit.host}:${jdbc.base.fruit.port}/${jdbc.base.fruit.dbname}?useUnicode=true&amp;zeroDateTimeBehavior=convertToNull&amp;autoReconnect=true"/>
+		<property name="user" value="${jdbc.base.fruit.username}" />
+		<property name="checkoutTimeout" value="5000" />
+		<property name="password" value="${jdbc.base.fruit.password}" />
+		<property name="acquireRetryAttempts" value="30" />		<!-- 重试次数 -->
 		<property name="acquireRetryDelay" value="1000" />		<!-- 重试间隔 -->
 		<property name="breakAfterAcquireFailure" value="false" />	<!-- 重试进行数据库异常恢复 -->
 		<property name="driverClass" value="com.mysql.jdbc.Driver" />
