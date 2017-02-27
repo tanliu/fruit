@@ -10,5 +10,6 @@ import com.fruit.base.DaoSupport;
  *
  */
 public interface OperationrecordsDao extends DaoSupport<Operationrecords>{
+    String DAO_NAME="com.fruit.dao.impl.OperationrecordsDaoImpl";
 
 }

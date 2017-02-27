@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value= OperationrecordsDao.DAO_NAME)
 public class OperationrecordsDaoImpl extends DaoSupportImpl<Operationrecords> implements OperationrecordsDao {
 
 }

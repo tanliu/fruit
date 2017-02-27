@@ -10,6 +10,7 @@ import org.hibernate.criterion.Example;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.annotation.Resource;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ import java.util.Map;
 
 public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
-	@Autowired
+	@Resource(name="sessionFactory")
 	private SessionFactory sessionFactory;
 	String select_new_class ;
 	String from_table_t ;
@@ -53,8 +54,10 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 	 */
 	@Override
 	public Session getSession() {
+		Session session=sessionFactory.getCurrentSession();
+
 		
-		return sessionFactory.getCurrentSession();
+		return session;
 	}
 	@Override
 	public T save(T entity) {

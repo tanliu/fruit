@@ -2,6 +2,7 @@ package com.fruit.dao;
 
 
 import com.fruit.base.DaoSupport;
+
 import com.fruit.entity.Productinformation;
 
 /**
@@ -10,5 +11,5 @@ import com.fruit.entity.Productinformation;
  *
  */
 public interface ProductinformationDao extends DaoSupport<Productinformation>{
-
+    String DAO_NAME="com.fruit.dao.impl.ProductinformationDaoImpl";
 }

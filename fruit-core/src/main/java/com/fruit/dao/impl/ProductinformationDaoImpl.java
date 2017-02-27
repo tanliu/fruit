@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value = ProductinformationDao.DAO_NAME)
 public class ProductinformationDaoImpl extends DaoSupportImpl<Productinformation> implements ProductinformationDao {
 
 }

@@ -18,7 +18,7 @@
 	<!-- For dao, jdbc connections, datasource -->
 	<!-- ===================================== -->
 	<!-- 事务管理 -->
-	<bean id="txManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	<bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 
