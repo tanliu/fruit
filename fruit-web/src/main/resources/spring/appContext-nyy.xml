@@ -8,5 +8,4 @@
 	<bean id="nyyConfig" class="com.yy.nyyframework.ext.NyyConfig">
 		<property name="secLevel" value="NO_CHECK" />
 	</bean>
-
 </beans>
