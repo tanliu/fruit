@@ -4,8 +4,8 @@
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<!-- NYY CONFIG -->
+<!--	 NYY CONFIG
 	<bean id="nyyConfig" class="com.yy.nyyframework.ext.NyyConfig">
 		<property name="secLevel" value="NO_CHECK" />
-	</bean>
+	</bean>-->
 </beans>

@@ -54,10 +54,10 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 	 */
 	@Override
 	public Session getSession() {
-		Session session=sessionFactory.getCurrentSession();
+		//Session session=sessionFactory.getCurrentSession();
 
 		
-		return session;
+		return sessionFactory.openSession();
 	}
 	@Override
 	public T save(T entity) {

@@ -25,10 +25,9 @@
 	<!-- 事务通知 -->
 	<tx:advice id="txAdvice" transaction-manager="txManager">
 		<tx:attributes>
-			<tx:method name="find*" read-only="true"/>
-			<tx:method name="get*" read-only="true"/>
-			<tx:method name="list*" read-only="true"/>
-			<tx:method name="*" rollback-for="Throwable"/>
+			<tx:method name="get*" read-only="true" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*"  propagation="REQUIRED"/>
 		</tx:attributes>
 	</tx:advice>
 	<!-- aop配置被事务控制的类 -->
