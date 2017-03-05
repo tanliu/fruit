@@ -3,6 +3,7 @@
  */
 package com.fruit.dao.impl;
 
+import com.fruit.base.BaseDaoImpl;
 import com.fruit.dao.UserRoleDao;
 import com.fruit.entity.UserRole;
 import org.springframework.stereotype.Repository;
