@@ -4,6 +4,7 @@
 package com.fruit.dao.impl;
 
 
+import com.fruit.base.BaseDaoImpl;
 import com.fruit.dao.UserDao;
 import com.fruit.entity.User;
 import com.fruit.entity.UserRole;

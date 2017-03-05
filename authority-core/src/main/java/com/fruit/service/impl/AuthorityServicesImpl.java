@@ -1,4 +1,5 @@
 package com.fruit.service.impl;
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.AuthorityDao;
 import com.fruit.entity.Authority;
 import com.fruit.entity.RoleAuthority;

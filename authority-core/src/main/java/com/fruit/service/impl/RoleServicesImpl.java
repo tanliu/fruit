@@ -11,6 +11,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.RoleAuthorityDao;
 import com.fruit.dao.RoleDao;
 import com.fruit.entity.Role;

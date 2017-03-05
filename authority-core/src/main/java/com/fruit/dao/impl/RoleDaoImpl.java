@@ -4,6 +4,7 @@
 package com.fruit.dao.impl;
 
 
+import com.fruit.base.BaseDaoImpl;
 import com.fruit.dao.RoleDao;
 import com.fruit.entity.Role;
 import com.fruit.entity.RoleAuthority;

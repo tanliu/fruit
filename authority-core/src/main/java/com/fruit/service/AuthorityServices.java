@@ -1,6 +1,7 @@
 package com.fruit.service;
 
 
+import com.fruit.base.BaseServices;
 import com.fruit.entity.Authority;
 
 import java.util.List;

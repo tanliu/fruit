@@ -3,6 +3,7 @@
  */
 package com.fruit.dao;
 
+import com.fruit.base.BaseDao;
 import com.fruit.entity.Role;
 import com.fruit.entity.RoleAuthority;
 

@@ -4,6 +4,7 @@
 package com.fruit.dao.impl;
 
 
+import com.fruit.base.BaseDaoImpl;
 import com.fruit.dao.AuthorityDao;
 import com.fruit.entity.Authority;
 import org.hibernate.Query;

@@ -2,8 +2,6 @@
  * 
  */
 package com.fruit.base;
-
-import com.fruit.dao.BaseDao;
 import com.fruit.utils.PageUtils;
 import com.fruit.utils.QueryUtils;
 import org.hibernate.Query;

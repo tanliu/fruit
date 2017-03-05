@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 
 import javax.annotation.Resource;
 
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.RoleAuthorityDao;
 import com.fruit.entity.RoleAuthority;
 import com.fruit.service.RoleAuthotityServices;

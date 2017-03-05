@@ -1,5 +1,5 @@
 package com.fruit.service.impl;
-
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.OrganizeDao;
 import com.fruit.entity.Organization;
 import com.fruit.service.OrganizeServices;

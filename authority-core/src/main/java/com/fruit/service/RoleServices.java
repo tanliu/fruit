@@ -1,5 +1,6 @@
 package com.fruit.service;
 
+import com.fruit.base.BaseServices;
 import com.fruit.entity.Role;
 import com.fruit.entity.RoleAuthority;
 import com.fruit.utils.PageUtils;

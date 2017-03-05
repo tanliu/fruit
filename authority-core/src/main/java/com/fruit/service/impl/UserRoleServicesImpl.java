@@ -1,5 +1,6 @@
 package com.fruit.service.impl;
 
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.UserRoleDao;
 import com.fruit.entity.UserRole;
 import com.fruit.service.UserRoleServices;

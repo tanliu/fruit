@@ -2,6 +2,7 @@ package com.fruit.dao;
 
 
 
+import com.fruit.base.BaseDao;
 import com.fruit.entity.Organization;
 
 import java.util.List;

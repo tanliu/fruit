@@ -5,6 +5,7 @@ package com.fruit.dao;
 
 
 
+import com.fruit.base.BaseDao;
 import com.fruit.entity.RoleAuthority;
 
 import java.util.List;

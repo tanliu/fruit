@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.fruit.base.BaseServicesImpl;
 import com.fruit.dao.UserDao;
 import com.fruit.entity.Role;
 import com.fruit.entity.User;

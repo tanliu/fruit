@@ -4,6 +4,7 @@
 package com.fruit.dao.impl;
 
 
+import com.fruit.base.BaseDaoImpl;
 import com.fruit.dao.OrganizeDao;
 import com.fruit.entity.Organization;
 import org.springframework.stereotype.Repository;

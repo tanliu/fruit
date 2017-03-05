@@ -3,8 +3,6 @@
  */
 package com.fruit.base;
 
-import com.fruit.dao.BaseDao;
-import com.fruit.service.BaseServices;
 import com.fruit.utils.PageUtils;
 import com.fruit.utils.QueryUtils;
 import org.springframework.util.StringUtils;
