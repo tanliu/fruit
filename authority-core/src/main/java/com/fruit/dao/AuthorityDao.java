@@ -4,7 +4,7 @@
 package com.fruit.dao;
 
 
-import com.fruit.base.BaseDao;
+import com.fruit.base.BaseDaos;
 import com.fruit.entity.Authority;
 
 import java.util.List;
@@ -20,7 +20,7 @@ import java.util.List;
  * 修改备注： 
  * @version 
  */
-public interface AuthorityDao extends BaseDao<Authority> {
+public interface AuthorityDao extends BaseDaos<Authority> {
 	public static final String DAO_NAME="com.zhbit.dao.system.impl.AuthorityDaoImpl";
 
 	/**

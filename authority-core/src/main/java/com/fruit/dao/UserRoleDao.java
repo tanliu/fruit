@@ -4,7 +4,7 @@
 package com.fruit.dao;
 
 
-import com.fruit.base.BaseDao;
+import com.fruit.base.BaseDaos;
 import com.fruit.entity.UserRole;
 
 /**
@@ -18,7 +18,7 @@ import com.fruit.entity.UserRole;
  * 修改备注： 
  * @version 
  */
-public interface UserRoleDao extends BaseDao<UserRole> {
+public interface UserRoleDao extends BaseDaos<UserRole> {
 	public final static String DAO_NAME="com.zhbit.dao.system.UserRoleDaoImpl";
 
 }

@@ -2,7 +2,7 @@ package com.fruit.dao;
 
 
 
-import com.fruit.base.BaseDao;
+import com.fruit.base.BaseDaos;
 import com.fruit.entity.Organization;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import java.util.List;
  * 修改备注： 
  * @version 
  */ 
-public interface OrganizeDao extends BaseDao<Organization> {
+public interface OrganizeDao extends BaseDaos<Organization> {
 	public static final String DAO_NAME="com.zhbit.dao.system.impl.OrganizeDaoImpl";
 	
 	

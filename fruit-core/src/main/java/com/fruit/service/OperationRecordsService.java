@@ -11,6 +11,5 @@ import java.util.Map;
 public interface OperationRecordsService extends BaseService<Operationrecords> {
     String SERVER_NAME="com.fruit.service.impl.OperationRecordsServiceIml";
 
-
     public String showRecords(Integer page,Integer pageSize,Map<String, String> params);
 }

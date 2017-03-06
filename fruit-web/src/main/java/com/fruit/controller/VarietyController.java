@@ -7,6 +7,7 @@ import com.fruit.service.VarietyService;
 import com.fruit.utils.DataTool;
 import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class VarietyController extends BaseController {
 
     @Resource(name=VarietyService.SERVICE_NAME)
     VarietyService varietyService;
-    @Resource(name=ProductinformationService.SERVIEC_NAME)
+   // @Resource(name=ProductinformationService.SERVIEC_NAME)
     ProductinformationService productinformationService;
     //------------------------------------------------企业品种信息---------------------------------------------------
 
@@ -113,7 +114,10 @@ public class VarietyController extends BaseController {
      */
     @ResponseBody
     @RequestMapping(value="/getVarietyDetail")
-    public String getVarietyDetail(int id){
+    public String getVarietyDetail(int id,@RequestParam(value = "callback",required = false)String callback){
+        if (StringUtils.isNotBlank(callback)){
+            return callback+"("+varietyService.getVarietyDetail(id)+")";
+        }
         return varietyService.getVarietyDetail(id);
     }
 

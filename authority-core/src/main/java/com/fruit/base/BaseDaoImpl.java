@@ -24,7 +24,7 @@ import java.util.List;
  * 修改备注： 
  * @version 
  */
-public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDao<T> {
+public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDaos<T> {
 	
 	Class entityClass;
 	

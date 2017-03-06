@@ -26,14 +26,14 @@ import java.util.List;
 public class BaseServicesImpl<T> implements BaseServices<T> {
 	
 	Class entityClass;
-	BaseDao<T> baseDao;
+	BaseDaos<T> baseDao;
 	
 	public BaseServicesImpl(){
 		ParameterizedType parameterizedType=(ParameterizedType) this.getClass().getGenericSuperclass();
 		entityClass=(Class) parameterizedType.getActualTypeArguments()[0];
 	}
 	
-	public void setBaseDao(BaseDao<T> baseDao) {
+	public void setBaseDao(BaseDaos<T> baseDao) {
 		this.baseDao = baseDao;
 	}
 

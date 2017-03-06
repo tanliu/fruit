@@ -3,7 +3,7 @@
  */
 package com.fruit.dao;
 
-import com.fruit.base.BaseDao;
+import com.fruit.base.BaseDaos;
 import com.fruit.entity.Role;
 import com.fruit.entity.RoleAuthority;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * 修改备注： 
  * @version 
  */
-public interface RoleDao extends BaseDao<Role> {
+public interface RoleDao extends BaseDaos<Role> {
 	public static String DAO_NAME="com.zhbit.dao.system.impl.RoleDaoImpl";
 
 	/**
