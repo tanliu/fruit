@@ -7,7 +7,6 @@ import com.fruit.service.VarietyService;
 import com.fruit.utils.DataTool;
 import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,23 +43,15 @@ public class VarietyController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/showVarieties")
-    public String showVarieties(HttpServletRequest request, HttpSession session, Integer page, Integer pageSize){
+    public String showVarieties(HttpServletRequest request, HttpSession session, Integer start, Integer length){
 
         Map<String, String> params = ParamTool.map2Map(request.getParameterMap());
 
 
-        return varietyService.showVarieties(page, pageSize,  super.company.getId(),params);
+        return varietyService.showVarieties(start, length,  /*super.company.getId()*/1,params);
 
     }
 
-    /**
-     * 转到类别列表页面
-     * @return
-     */
-    @RequestMapping(value="/varietyList")
-    public String varietyList(Model model, HttpSession session,Integer page,HttpServletRequest request){
-        return "admin/variety/showVarieties";
-    }
 
     /**
      * 企业柚子类别删除
@@ -83,8 +74,9 @@ public class VarietyController extends BaseController {
     /**
      * 企业柚子新品种添加
      */
-    @RequestMapping(value="/variety/add",method=RequestMethod.POST)
-    public String addVariety(@RequestParam(value = ("file"), required = false) MultipartFile[] files,@Valid Variety variety,HttpSession session,Model model){
+    @ResponseBody
+    @RequestMapping(value="/add",method=RequestMethod.POST)
+    public String addVariety(@RequestParam(value = ("file"), required = false) MultipartFile[] files,@Valid Variety variety,HttpSession session){
         JsonResult result = new JsonResult(200, "添加成功");
         String vnumber = DataTool.getVarietyNumber(variety.getYear(), variety.getNumber());
         if(vnumber==null){
@@ -103,10 +95,7 @@ public class VarietyController extends BaseController {
                 result.reset(400, "产品编号已经存在，请换一个");
             }
         }
-
-        model.addAttribute("result",result.toString());
-
-        return "tags/returnIframeResult";
+        return result.toString();
     }
 
     /**
@@ -115,9 +104,9 @@ public class VarietyController extends BaseController {
     @ResponseBody
     @RequestMapping(value="/getVarietyDetail")
     public String getVarietyDetail(int id,@RequestParam(value = "callback",required = false)String callback){
-        if (StringUtils.isNotBlank(callback)){
+/*        if (StringUtils.isNotBlank(callback)){
             return callback+"("+varietyService.getVarietyDetail(id)+")";
-        }
+        }*/
         return varietyService.getVarietyDetail(id);
     }
 
