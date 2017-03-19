@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=QualityDao.DAO_NAME)
 public class QualityDaoImpl extends DaoSupportImpl<Quality> implements QualityDao {
 
 }

@@ -34,6 +34,19 @@ public class BaseController {
     @Resource(name=UploadPictureService.SERVER_NAME)
     UploadPictureService uploadPictureService;
 
+
+    //TODO修改CompanyId
+    public  int getCompanyId(){
+        return 1;
+    }
+
+    public Company getCompany(){
+        Company myCompany=new Company("SJ","十记金柚","梅州梅县","介绍~~~~~","网址~~~~~","110112119","委托~~~","文件~~~");
+        myCompany.setId(1);
+        return myCompany;
+    }
+
+
     @ModelAttribute
     public void init(HttpSession session, HttpServletRequest request) throws IOException {
         me=(Employee)session.getAttribute("user");

@@ -10,5 +10,5 @@ import com.fruit.entity.Qualityinspector;
  *
  */
 public interface QualityinspectorDao extends DaoSupport<Qualityinspector> {
-
+    String DAO_NAME="com.fruit.dao.impl.QualityinspectorDaoImpl";
 }

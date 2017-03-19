@@ -8,5 +8,5 @@ import com.fruit.entity.Fertilize;
  *
  */
 public interface FertilizeDao extends DaoSupport<Fertilize>{
-
+    String DAO_NAME="com.fruit.dao.impl.FertilizeDaoImpl";
 }

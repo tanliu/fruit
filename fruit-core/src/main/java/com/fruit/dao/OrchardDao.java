@@ -8,5 +8,5 @@ import com.fruit.entity.Orchard;
  *
  */
 public interface OrchardDao extends DaoSupport<Orchard>{
-
+    String DAO_NAME="com.fruit.dao.impl.OrchardDaoImpl";
 }

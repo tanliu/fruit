@@ -9,5 +9,5 @@ import com.fruit.entity.Environment;
  *
  */
 public interface EnvironmentDao extends DaoSupport<Environment>{
-
+    String DAO_NAME="com.fruit.dao.impl.EnvironmentDaoImpl";
 }

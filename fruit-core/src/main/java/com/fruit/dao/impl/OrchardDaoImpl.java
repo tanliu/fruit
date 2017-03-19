@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=OrchardDao.DAO_NAME)
 public class OrchardDaoImpl extends DaoSupportImpl<Orchard> implements OrchardDao {
 
 }

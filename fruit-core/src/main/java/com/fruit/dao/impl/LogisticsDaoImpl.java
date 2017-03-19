@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=LogisticsDao.DAO_NAME)
 public class LogisticsDaoImpl extends DaoSupportImpl<Logistics> implements LogisticsDao {
 }

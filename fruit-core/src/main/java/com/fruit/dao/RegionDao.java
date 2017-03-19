@@ -10,5 +10,5 @@ import com.fruit.entity.Region;
  *
  */
 public interface RegionDao extends DaoSupport<Region>{
-
+    String DAO_NAME="com.fruit.dao.impl.RegionDaoImpl";
 }

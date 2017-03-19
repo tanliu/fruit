@@ -10,4 +10,5 @@ import com.fruit.entity.Cultivate;
  */
 public interface CultivateDao extends DaoSupport<Cultivate>{
 
+    String DAO_NAME="com.fruit.dao.impl.CultivateDaoImpl";
 }

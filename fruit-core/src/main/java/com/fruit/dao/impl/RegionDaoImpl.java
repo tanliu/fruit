@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=RegionDao.DAO_NAME)
 public class RegionDaoImpl extends DaoSupportImpl<Region> implements RegionDao {
 
 }

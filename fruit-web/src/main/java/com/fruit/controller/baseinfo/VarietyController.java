@@ -1,4 +1,4 @@
-package com.fruit.controller;
+package com.fruit.controller.baseinfo;
 
 import com.fruit.base.BaseController;
 import com.fruit.entity.Variety;
@@ -33,7 +33,7 @@ public class VarietyController extends BaseController {
 
     @Resource(name=VarietyService.SERVICE_NAME)
     VarietyService varietyService;
-   // @Resource(name=ProductinformationService.SERVIEC_NAME)
+    @Resource(name=ProductinformationService.SERVIEC_NAME)
     ProductinformationService productinformationService;
     //------------------------------------------------企业品种信息---------------------------------------------------
 
@@ -70,6 +70,28 @@ public class VarietyController extends BaseController {
         return result.toString();
     }
 
+    /**
+     * 企业柚子类别删除
+     */
+    @ResponseBody
+    @RequestMapping(value="/deleteAllVariety")
+    public String deleteAllVariety(String ids){
+        JsonResult result = new JsonResult(200, "删除成功！");
+        String[] idarr=ids.split(",");
+        for (int i = 0; i <idarr.length ; i++) {
+            String id=idarr[i];
+            int count = productinformationService.getFindByPropertySize("variety.id", id);
+            if(count>0){
+                result.reset(400, "该品种已经被使用，不能删除");
+                break;
+            }else{
+                varietyService.delete(Integer.parseInt(id));
+            }
+        }
+
+
+        return result.toString();
+    }
 
     /**
      * 企业柚子新品种添加
@@ -85,7 +107,7 @@ public class VarietyController extends BaseController {
             Integer count = varietyService.getFindByPropertySize("number", variety.getNumber());
             if(count==0){
                 variety.setNumber(vnumber);
-                variety.setCompany( super.company);
+                variety.setCompany(getCompany());
                 variety.setType(variety.getNumber());
                 String image = super.saveUpdateImages(files);
                 variety.setPictures(image);
@@ -104,29 +126,26 @@ public class VarietyController extends BaseController {
     @ResponseBody
     @RequestMapping(value="/getVarietyDetail")
     public String getVarietyDetail(int id,@RequestParam(value = "callback",required = false)String callback){
-/*        if (StringUtils.isNotBlank(callback)){
-            return callback+"("+varietyService.getVarietyDetail(id)+")";
-        }*/
         return varietyService.getVarietyDetail(id);
     }
 
+    @ResponseBody
     @RequestMapping(value="/updateVariety",method= RequestMethod.POST)
-    public String updateVariety(@RequestParam(value = ("file"), required = false) MultipartFile[] files, @Valid Variety variety, Model model){
+    public String updateVariety(@RequestParam(value = ("file"), required = false) MultipartFile[] files, @Valid Variety variety){
         Variety old = varietyService.getById(variety.getId());
         old.setExpirationdate(variety.getExpirationdate());
         old.setGrade(variety.getGrade());
         old.setInformation(variety.getInformation());
         old.setSize(variety.getSize());
-        old.setPictures(ParamTool.mergeString(variety.getPictures(), super.saveUpdateImages(files)));
+        old.setPictures(ParamTool.mergeString(old.getPictures(), super.saveUpdateImages(files)));
         old.setName(variety.getName());
         old.setYear(variety.getYear());
         old.setStorage(variety.getStorage());
         varietyService.update(old);
         JsonResult result = new JsonResult(200, "修改成功");
 
-        model.addAttribute("result",result.toString());
 
-        return "tags/returnIframeResult";
+        return result.toString();
     }
 
 }

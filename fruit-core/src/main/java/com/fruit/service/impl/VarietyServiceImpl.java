@@ -76,7 +76,6 @@ public class VarietyServiceImpl extends BaseServiceImpl<Variety> implements Vari
         StringBuffer sql = new StringBuffer();
         sql.append("select t.id,t.`name`,t.`year`,t.number,t.expirationdate,t.`storage`,t.grade,t.size,t.information,");
         sql.append("t.pictures,DATE_FORMAT(t.createTime, '%Y-%m-%d %H:%i:%s') createTime from variety t where id=?");
-        System.out.println("----tanliu-----sql值："+sql.toString());
         Map<String, Object> result = findUniqueToMap(sql.toString(),id);
         String pictures = result.get("pictures").toString();
         List<ImageBean> list = ImageBean.getImageList(pictures);

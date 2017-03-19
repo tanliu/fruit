@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=PestDao.DAO_NAME)
 public class PestDaoImpl extends DaoSupportImpl<Pest> implements PestDao {
 
 }

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value = BoxDao.DAO_NAME)
 public class BoxDaoImpl extends DaoSupportImpl<Box> implements BoxDao {
 
 

@@ -9,5 +9,5 @@ import com.fruit.entity.Packagebatch;
  *
  */
 public interface PackagebatchDao extends DaoSupport<Packagebatch>{
-
+    String DAO_NAME="com.fruit.dao.impl.PackagebatchDaoImpl";
 }

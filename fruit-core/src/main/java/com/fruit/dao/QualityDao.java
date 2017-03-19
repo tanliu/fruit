@@ -10,5 +10,5 @@ import com.fruit.entity.Quality;
  *
  */
 public interface QualityDao extends DaoSupport<Quality>{
-
+    String DAO_NAME="com.fruit.dao.impl.QualityDaoImpl";
 }

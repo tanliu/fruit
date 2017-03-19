@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=CultivateDao.DAO_NAME)
 public class CultivateDaoImpl extends DaoSupportImpl<Cultivate> implements CultivateDao {
 
 }

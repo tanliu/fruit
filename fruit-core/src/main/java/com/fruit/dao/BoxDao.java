@@ -9,5 +9,5 @@ import com.fruit.entity.Box;
  *
  */
 public interface BoxDao extends DaoSupport<Box>{
-
+    String DAO_NAME="com.fruit.dao.impl.BoxDaoImpl";
 }

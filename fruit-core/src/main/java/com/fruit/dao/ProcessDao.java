@@ -9,5 +9,5 @@ import com.fruit.entity.Process;
  *
  */
 public interface ProcessDao extends DaoSupport<Process> {
-
+    String DAO_NAME="com.fruit.dao.impl.ProcessDaoImpl";
 }

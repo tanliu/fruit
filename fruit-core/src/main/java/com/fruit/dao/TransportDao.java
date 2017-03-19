@@ -10,5 +10,5 @@ import com.fruit.entity.Transport;
  *
  */
 public interface TransportDao extends DaoSupport<Transport>{
-
+    String DAO_NAME="com.fruit.dao.impl.TransportDaoImpl";
 }

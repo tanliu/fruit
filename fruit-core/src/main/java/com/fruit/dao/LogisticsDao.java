@@ -9,5 +9,5 @@ import com.fruit.entity.Logistics;
  *
  */
 public interface LogisticsDao extends DaoSupport<Logistics>{
-
+    String DAO_NAME="com.fruit.dao.impl.LogisticsDaoImpl";
 }

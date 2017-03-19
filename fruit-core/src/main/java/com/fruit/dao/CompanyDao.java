@@ -9,5 +9,5 @@ import com.fruit.entity.Company;
  *
  */
 public interface CompanyDao extends DaoSupport<Company>{
-
+    String DAO_NAME="com.fruit.dao.impl.CompanyDaoImpl";
 }

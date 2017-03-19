@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=EnvironmentDao.DAO_NAME)
 public class EnvironmentDaoImpl extends DaoSupportImpl<Environment> implements EnvironmentDao {
 
 }

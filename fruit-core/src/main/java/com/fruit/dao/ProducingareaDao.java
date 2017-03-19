@@ -10,5 +10,5 @@ import com.fruit.entity.Producingarea;
  *
  */
 public interface ProducingareaDao extends DaoSupport<Producingarea> {
-
+    String DAO_NAME="com.fruit.dao.impl.ProducingareaDaoImpl";
 }

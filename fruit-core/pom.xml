@@ -122,8 +122,8 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.2.GA</version>
 		</dependency>
+
 		<dependency>
 			<groupId>jstl</groupId>
 			<artifactId>jstl</artifactId>
@@ -220,6 +220,31 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+		<resources>
+			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>**/*.hbm.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>
+<!--			<resource>
+				<directory>src/main/java</directory>
+				<includes>
+					<include>com/fruit/utils/*.</include>
+				</includes>
+			</resource>-->
+<!--			<resource>
+				<directory>src/main/resources</directory>
+				<includes>
+					<include>**/*.xml</include>
+					<include>**/*.properties</include>
+				</includes>
+			</resource>-->
+		</resources>
+
+
 	</build>
 
 	<profiles>

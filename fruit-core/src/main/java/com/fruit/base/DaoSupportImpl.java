@@ -26,7 +26,7 @@ import java.util.Map;
 
 public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
-	@Resource(name="sessionFactory")
+	@Autowired
 	private SessionFactory sessionFactory;
 	String select_new_class ;
 	String from_table_t ;
@@ -43,20 +43,22 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		update_table_t_set="update "+clazz.getSimpleName()+" t set ";
 		delete_from_table = "delete from "+clazz.getSimpleName()+" ";
 	}
-	
+
 
 
 
 	/**
 	 * 获取当前可用的Session
-	 * 
+	 *
 	 * @return
 	 */
 	@Override
 	public Session getSession() {
+		//Session session=sessionFactory.getCurrentSession();
 
 
-		
+		//return sessionFactory.openSession();
+		System.out.println("-------------------------");
 		return sessionFactory.getCurrentSession();
 	}
 	@Override
@@ -75,8 +77,8 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 			getSession().delete(obj);
 		}
 	}
-	
-	
+
+
 	@Override
 	public T getById(Long id) {
 		if (id == null) {
@@ -109,10 +111,10 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 	@Override
 	public List<T> findAll(String constructor) {
-		
+
 		return findByPage(1, 50,constructor);
 	}
-	
+
 	@Override
 	public List<Object[]> findMultiTableQuery(String hql,Integer page,Integer pageSize){
 		if(page==null||page<1) page=1;
@@ -131,23 +133,23 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
 		for(int i=0;i<params.length;i++){
 			sqlQuery.setParameter(i, params[i]);
-		}	
+		}
 
 		sqlQuery.setFirstResult(firstResult).setMaxResults(pageSize);
 		sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		return sqlQuery.list();
 	}
-	
+
 	@Override
 	public List<Map<String, Object>> findMultiTableQueryToMap(String sql,Object... params){
 		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
 		for(int i=0;i<params.length;i++){
 			sqlQuery.setParameter(i, params[i]);
-		}	
+		}
 		sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		return sqlQuery.list();
 	}
-	
+
 	@Override
 	public Map<String,Object> findUniqueToMap(String sql,Object... params){
 		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
@@ -165,48 +167,48 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		return findByHql(from_table_t, page, pageSize,constructor);
 
 	}
-	
+
 	@Override
 	public List<T> findByPage(Integer page, Integer pageSize, String property,
-			boolean isAsc,String constructor) {
+							  boolean isAsc,String constructor) {
 
 		return findByHql(from_table_t, page, pageSize,property,isAsc,constructor);
 	}
 
-	
-	
+
+
 
 	@Override
 	public PageResultBean<Map<String, Object>> findBySql(String sql, Integer pageSize, Integer page, Object... params) {
-		
-		
+
+
 		if(page==null||page<1) page=1;
 		if(pageSize==null||pageSize<1) pageSize=10;
 
 		int skip= (page-1)*pageSize;
-		
+
 		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
 		for(int i=0;i<params.length;i++){
 			sqlQuery.setParameter(i, params[i]);
-		}	
+		}
 
 		sqlQuery.setFirstResult(skip).setMaxResults(pageSize);
 		sqlQuery.setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP);
 		List<Map<String, Object>>  list = sqlQuery.list();
-		
+
 		Integer total = getSqlSize(sql,params);
-		
+
 		return new PageResultBean<>(pageSize, skip, total, list);
 	}
-	
+
 	@Override
 	public Integer updateBySql(String sql,Object... params) {
 		SQLQuery sqlQuery = getSession().createSQLQuery(sql);
 		for(int i=0;i<params.length;i++){
 			sqlQuery.setParameter(i, params[i]);
-		}	
+		}
 		Integer total = sqlQuery.executeUpdate();
-		
+
 		return total;
 	}
 
@@ -215,9 +217,9 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 	@Override
 	public Integer getSqlSize(String sql, Object... params) {
-		
+
 		sql="select count(*) from ("+sql+") t ";
-		
+
 		SQLQuery query = getSession().createSQLQuery(sql);
 		for(int i=0;i<params.length;i++){
 			query.setParameter(i, params[i]);
@@ -241,14 +243,14 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		if(constructor!=null){
 			hql = select_new_class+"("+constructor+") "+hql;
 		}
-		
+
 		Query query = getSession().createQuery(hql).setFirstResult(firstResult).setMaxResults(pageSize);
 		return query.list();
 	}
 
 	@Override
 	public List<T> findByHql(String hql, Integer page, Integer pageSize,
-			String property, boolean isAsc,String constructor) {
+							 String property, boolean isAsc,String constructor) {
 		String asc_desc = " desc ";
 		if(isAsc) asc_desc =" asc ";
 		hql = hql+" order by t."+property+asc_desc;
@@ -269,17 +271,18 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		}else if(hql.startsWith("select")||hql.startsWith("SELECT")){
 			hql=hql.replaceFirst("^[Ss].*\\s[Ff][Rr][Oo][Mm]\\s", "select count(*) from ");
 		}
-		
+        hql="select count(*) from Variety t where t.number = '123567'";
+
 		Query query = getSession().createQuery(hql);
 		int count = ((Number)query.uniqueResult()).intValue();
 		return count;
 	}
 
 
-	
+
 	@Override
 	public List<T> findByProperty(String property, Object value, Integer page,
-			Integer pageSize,String constructor) {
+								  Integer pageSize,String constructor) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(property, value);
 		return findByProperties(map, page, pageSize,constructor);
@@ -288,14 +291,14 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 	@Override
 	public List<T> findByProperty(String myProperty, Object value, Integer page,
-			Integer pageSize, String orderProperty, boolean isAsc,String constructor) {
+								  Integer pageSize, String orderProperty, boolean isAsc,String constructor) {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put(myProperty, value);
 		return findByProperties(map, page, pageSize, orderProperty, isAsc,constructor);
 	}
-	
-	
-	
+
+
+
 	@Override
 	public T findUniqueByProperty(String property, Object value,String constructor) {
 		List<T> list = findByProperty(property, value, 1, 1,constructor);
@@ -304,32 +307,32 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 	}
 
 
-	
+
 	@Override
 	public List<T> findByProperties(T entity,Integer page , Integer pageSize) {
 		int firstResult= (page-1)*pageSize;
 		int lastResult= firstResult+pageSize;
-		
+
 		return getSession().createCriteria(clazz).add(Example.create(entity))
 				.setFirstResult(firstResult).setMaxResults(lastResult).list();
 	}
-	
+
 	@Override
 	public List<T> findByProperties(Map<String, Object> map,Integer page , Integer pageSize,
-			String property, boolean isAsc,String constructor) {
-		
+									String property, boolean isAsc,String constructor) {
+
 		String hql = createFindByPropertiesHql(map,from_table_t);
 		return findByHql(hql, page, pageSize, property, isAsc,constructor);
 	}
-	
+
 
 	@Override
 	public List<T> findByProperties(Map<String, Object> map, Integer page,
-			Integer pageSize,String constructor) {
+									Integer pageSize,String constructor) {
 		String hql = createFindByPropertiesHql(map,from_table_t);
 		return findByHql(hql, page, pageSize,constructor);
 	}
-	
+
 	@Override
 	public Integer getFindByPropertiesSize(Map<String, Object> map) {
 		String hql = createFindByPropertiesHql(map,from_table_t);
@@ -348,9 +351,9 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 	@Override
 	public Integer updateProperties(Map<String, Object> updateMap,
-			Map<String, Object> conditions) {
-		
-		
+									Map<String, Object> conditions) {
+
+
 		String preHql = createSetProperties(updateMap);
 		String hql = createFindByPropertiesHql(conditions, preHql);
 
@@ -362,12 +365,12 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 	@Override
 	public Integer updateProperty(String updateProperty, Object value,
-			String conditionName, Object conditionValue) {
+								  String conditionName, Object conditionValue) {
 		Map<String, Object> updateMap = new HashMap<>();
 		updateMap.put(updateProperty, value);
 		Map<String, Object> conditions = new HashMap<>();
 		conditions.put(conditionName, conditionValue);
-		
+
 		return updateProperties(updateMap, conditions);
 	}
 
@@ -379,7 +382,7 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 
 		Map<String, Object> conditions = new HashMap<>();
 		conditions.put(conditionName, conditionValue);
-		
+
 		return delete(conditions);
 	}
 
@@ -392,7 +395,7 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		return getSession().createQuery(hql).executeUpdate();
 	}
 
-	
+
 	@Override
 	public Integer executeSql(String sql){
 		Query query = getSession().createSQLQuery(sql);
@@ -405,7 +408,7 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 	 */
 	private String createSetProperties(Map<String, Object> map){
 		StringBuffer stringBuffer = new StringBuffer(update_table_t_set);
-		
+
 		int size = map.size();
 		int i=1;
 		for(String key:map.keySet()){
@@ -415,16 +418,16 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 			}else {
 				stringBuffer.append(" t."+key + " = "+value+" ");
 			}
-				
+
 			if(i<size){
 				stringBuffer.append(",");
 			}
 			i++;
 		}
-		
+
 		return stringBuffer.toString();
 	}
-	
+
 
 
 	/**创建查询语句
@@ -445,18 +448,18 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 			}else {
 				stringBuffer.append(" t."+key + " = "+value+" ");
 			}
-				
+
 			if(i<size){
 				stringBuffer.append(" and ");
 			}
 			i++;
 		}
-		
-		
+
+
 		return stringBuffer.toString();
-		
+
 	}
-	
+
 	/**创建查询语句
 	 * @param map
 	 * @param preHql
@@ -475,20 +478,20 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 			}else {
 				stringBuffer.append(" "+key + " = "+value+" ");
 			}
-				
+
 			if(i<size){
 				stringBuffer.append(" and ");
 			}
 			i++;
 		}
-		
-		
+
+
 		return stringBuffer.toString();
-		
+
 	}
 
 
-	
+
 	/**
 	 * 通过hql查询，返回List
 	 * @param hql
@@ -498,5 +501,5 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		return getSession().createQuery(hql).list();
 	}
 
-	
+
 }

@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=DealerDao.DAO_NAME)
 public class DealerDaoImpl extends DaoSupportImpl<Dealer> implements DealerDao {
 
 }

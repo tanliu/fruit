@@ -10,5 +10,6 @@ import com.fruit.base.DaoSupport;
  *
  */
 public interface FarmerDao extends DaoSupport<Farmer>{
+    String DAO_NAME="com.fruit.dao.impl.FarmerDaoImpl";
          public void evict(Farmer object);
 }

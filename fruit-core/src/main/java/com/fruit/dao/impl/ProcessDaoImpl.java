@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=ProcessDao.DAO_NAME)
 public class ProcessDaoImpl extends DaoSupportImpl<Process> implements ProcessDao {
 
 }

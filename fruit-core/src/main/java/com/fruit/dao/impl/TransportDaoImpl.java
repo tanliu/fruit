@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=TransportDao.DAO_NAME)
 public class TransportDaoImpl extends DaoSupportImpl<Transport> implements TransportDao {
 
 }

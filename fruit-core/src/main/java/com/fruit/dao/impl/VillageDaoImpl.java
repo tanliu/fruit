@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value = VillageDao.DAO_NAME)
 public class VillageDaoImpl extends DaoSupportImpl<Village> implements VillageDao {
 
 }

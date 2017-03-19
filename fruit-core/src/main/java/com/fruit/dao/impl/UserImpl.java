@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 @Repository
-@Transactional
+@Transactional(value=UserDao.DAO_NAME)
 public class UserImpl extends DaoSupportImpl<User> implements UserDao {
 
 }

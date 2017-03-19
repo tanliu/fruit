@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=CompanyDao.DAO_NAME)
 public class CompanyDaoImpl extends DaoSupportImpl<Company> implements CompanyDao {
 
 }

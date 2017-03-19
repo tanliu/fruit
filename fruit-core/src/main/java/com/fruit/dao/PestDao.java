@@ -10,5 +10,5 @@ import com.fruit.base.DaoSupport;
  *
  */
 public interface PestDao extends DaoSupport<Pest>{
-
+    String DAO_NAME="com.fruit.dao.impl.PestDaoImpl";
 }

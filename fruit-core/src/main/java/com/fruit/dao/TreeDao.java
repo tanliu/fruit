@@ -10,5 +10,5 @@ import com.fruit.entity.Tree;
  *
  */
 public interface TreeDao extends DaoSupport<Tree>{
-
+    String DAO_NAME="com.fruit.dao.impl.TreeDaoImpl";
 }

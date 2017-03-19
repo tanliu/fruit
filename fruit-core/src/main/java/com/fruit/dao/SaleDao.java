@@ -10,5 +10,5 @@ import com.fruit.entity.Sale;
  *
  */
 public interface SaleDao extends DaoSupport<Sale>{
-
+    String DAO_NAME="com.fruit.dao.impl.SaleDaoImpl";
 }

@@ -10,5 +10,6 @@ import com.fruit.entity.Village;
  *
  */
 public interface VillageDao extends DaoSupport<Village>{
+    String DAO_NAME="com.fruit.dao.impl.VillageDaoImpl";
 
 }

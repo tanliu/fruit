@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=FertilizeDao.DAO_NAME)
 public class FertilizeDaoImpl extends DaoSupportImpl<Fertilize> implements FertilizeDao {
 
 }

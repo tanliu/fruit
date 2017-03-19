@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=ProducingareaDao.DAO_NAME)
 public class ProducingareaDaoImpl extends DaoSupportImpl<Producingarea> implements ProducingareaDao {
 
 }

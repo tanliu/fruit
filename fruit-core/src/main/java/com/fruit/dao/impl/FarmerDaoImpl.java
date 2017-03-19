@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=FarmerDao.DAO_NAME)
 public class FarmerDaoImpl extends DaoSupportImpl<Farmer> implements FarmerDao {
 	public void evict(Farmer object){
 		getSession().evict(object);

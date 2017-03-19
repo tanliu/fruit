@@ -10,5 +10,5 @@ import com.fruit.base.DaoSupport;
  *
  */
 public interface IrrigationDao extends DaoSupport<Irrigation>{
-
+    String DAO_NAME="com.fruit.dao.impl.IrrigationDaoImpl";
 }

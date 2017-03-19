@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author CSH
  *
  */
-@Repository
+@Repository(value=IrrigationDao.DAO_NAME)
 public class IrrigationDaoImpl extends DaoSupportImpl<Irrigation> implements IrrigationDao {
 
 }
