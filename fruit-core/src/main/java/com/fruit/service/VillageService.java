@@ -46,4 +46,5 @@ public interface VillageService extends BaseService<Village> {
 */
     public String showVillages(Integer page,Integer pageSize,Integer companyid,Map<String, String> params);
 
+    String getVarietyDetail(int id);
 }

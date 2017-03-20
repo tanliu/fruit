@@ -16,7 +16,6 @@ import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,15 +37,6 @@ public class VillageController extends BaseController {
 
     @Autowired
     OrchardService orchardService;
-    /**
-     * 返回村庄管理页面
-     */
-    @RequestMapping(value = {"/showVillagePage"})
-    public String showVillagePage(Model model) {
-
-        return "admin/address/showVillages";
-    }
-
     /**
      * 显示所有村庄
      *
@@ -139,5 +129,33 @@ public class VillageController extends BaseController {
 
         return result.toString();
     }
+
+    /**
+     * 批量删除村庄
+     */
+    @ResponseBody
+    @RequestMapping(value = {"/deleteAllVillage"}, method = RequestMethod.POST)
+    public String deleteAllVillage(String ids) {
+
+        JsonResult result = new JsonResult(200, "删除成功");
+        String[] idarr=ids.split(",");
+        for (int i = 0; i <idarr.length ; i++) {
+            String id = idarr[i];
+            int count = orchardService.getFindByPropertySize("village.id", id);
+            if (count > 0) {
+                result.reset(400, "该村庄已经被果园使用了，不能删除");
+                break;
+            } else {
+                villageService.delete(Integer.parseInt(id));
+            }
+        }
+        return result.toString();
+    }
+    @ResponseBody
+    @RequestMapping(value="/getVillageDetail")
+    public String getVarietyDetail(int id){
+        return villageService.getVarietyDetail(id);
+    }
+
 
 }

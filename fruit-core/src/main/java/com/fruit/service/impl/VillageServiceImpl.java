@@ -116,4 +116,13 @@ public class VillageServiceImpl extends BaseServiceImpl<Village> implements Vill
         return result.toString();
     }
 
+    @Override
+    public String getVarietyDetail(int id) {
+        StringBuffer sql = new StringBuffer();
+        sql.append("select t.id,t.name,t.number,t.companyId,t.region,DATE_FORMAT(t.createTime, '%Y-%m-%d %H:%i:%s') createTime from village t where id=? ");
+        Map<String, Object> result = findUniqueToMap(sql.toString(),id);
+        String str = ParamTool.subContent(JSONArray.fromObject(result).toString());
+        return str;
+    }
+
 }

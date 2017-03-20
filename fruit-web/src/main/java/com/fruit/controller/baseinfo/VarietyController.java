@@ -7,6 +7,7 @@ import com.fruit.service.VarietyService;
 import com.fruit.utils.DataTool;
 import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,7 +34,7 @@ public class VarietyController extends BaseController {
 
     @Resource(name=VarietyService.SERVICE_NAME)
     VarietyService varietyService;
-    @Resource(name=ProductinformationService.SERVIEC_NAME)
+    @Autowired
     ProductinformationService productinformationService;
     //------------------------------------------------企业品种信息---------------------------------------------------
 
@@ -92,6 +93,8 @@ public class VarietyController extends BaseController {
 
         return result.toString();
     }
+
+
 
     /**
      * 企业柚子新品种添加

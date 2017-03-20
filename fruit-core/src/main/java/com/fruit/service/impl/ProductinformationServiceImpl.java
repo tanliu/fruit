@@ -11,7 +11,7 @@ import javax.annotation.Resource;
 /**
  * Created by TanLiu on 2017/2/27.
  */
-@Service(value=ProductinformationService.SERVIEC_NAME)
+@Service
 public class ProductinformationServiceImpl extends BaseServiceImpl<Productinformation> implements ProductinformationService {
     ProductinformationDao productinformationDao;
 
