@@ -6,8 +6,8 @@ import com.fruit.entity.User;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-@Repository
-@Transactional(value=UserDao.DAO_NAME)
+@Repository(value=UserDao.DAO_NAME)
+@Transactional
 public class UserImpl extends DaoSupportImpl<User> implements UserDao {
 
 }

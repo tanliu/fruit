@@ -9,7 +9,6 @@ import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -44,12 +43,12 @@ public class VarietyController extends BaseController {
      */
     @ResponseBody
     @RequestMapping("/showVarieties")
-    public String showVarieties(HttpServletRequest request, HttpSession session, Integer start, Integer length){
+    public String showVarieties(HttpServletRequest request, HttpSession session,Integer page,Integer pageSize){
 
         Map<String, String> params = ParamTool.map2Map(request.getParameterMap());
 
 
-        return varietyService.showVarieties(start, length,  /*super.company.getId()*/1,params);
+        return varietyService.showVarieties(page, pageSize,  getCompanyId(),params);
 
     }
 

@@ -12,8 +12,7 @@ import javax.annotation.Resource;
 /**
  * Created by TanLiu on 2017/2/27.
  */
-
-@Service(value = UploadPictureService.SERVER_NAME)
+@Service
 public class UploadPictureServiceImpl extends BaseServiceImpl<UploadPicture> implements UploadPictureService {
 
     UploadPictureImpl uploadPicture;

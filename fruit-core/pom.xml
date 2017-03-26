@@ -203,9 +203,24 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.9</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.huanju.udb.lgn</groupId>
+			<artifactId>ca-common</artifactId>
+			<version>1.5-20140606</version>
+		</dependency>
+		<dependency>
+			<groupId>cn.huanju.udb.lgn</groupId>
+			<artifactId>ca-common</artifactId>
+			<version>1.5-20140606</version>
+		</dependency>
 
 
-    </dependencies>
+	</dependencies>
 
 
 

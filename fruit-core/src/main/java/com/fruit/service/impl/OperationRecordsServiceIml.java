@@ -14,7 +14,7 @@ import java.util.Map;
 /**
  * Created by TanLiu on 2017/2/27.
  */
-@Service(value = OperationRecordsService.SERVER_NAME)
+@Service
 public class OperationRecordsServiceIml extends BaseServiceImpl<Operationrecords> implements OperationRecordsService {
     OperationrecordsDao operationRecordsDao;
 

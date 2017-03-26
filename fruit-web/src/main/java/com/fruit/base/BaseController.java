@@ -11,10 +11,10 @@ import com.fruit.utils.ConfigProperty;
 import com.fruit.utils.MyTools;
 import com.fruit.utils.ParamTool;
 import org.apache.commons.io.FileUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.multipart.MultipartFile;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.File;
@@ -29,9 +29,9 @@ public class BaseController {
     protected Employee me = null;
     protected Company company=null;
 
-    @Resource(name=OperationRecordsService.SERVER_NAME)
+    @Autowired
     OperationRecordsService operationrecordsService;
-    @Resource(name=UploadPictureService.SERVER_NAME)
+    @Autowired
     UploadPictureService uploadPictureService;
 
 
@@ -107,6 +107,7 @@ public class BaseController {
         return sb.toString();
     }
 
-
-
+    public Employee getMe() {
+        return me;
+    }
 }

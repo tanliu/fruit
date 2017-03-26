@@ -1,10 +1,5 @@
 package com.fruit.controller.baseinfo;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import com.fruit.base.BaseController;
 import com.fruit.entity.Producingarea;
 import com.fruit.service.ProducingareaService;
@@ -13,10 +8,13 @@ import com.fruit.utils.JsonResult;
 import com.fruit.utils.ParamTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 
 
@@ -43,9 +41,9 @@ public class ProducingareaController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping(value={"/showProducingarea"},method=RequestMethod.POST)
-	public String showProducingarea(HttpServletRequest request,HttpSession session,Integer start, Integer length){
+	public String showProducingarea(HttpServletRequest request,HttpSession session,Integer page,Integer pageSize){
 		Map<String, String> params = ParamTool.map2Map(request.getParameterMap());
-		return producingareaService.showProductAreas(start, length,  getCompanyId(),params);
+		return producingareaService.showProductAreas(page, pageSize,  getCompanyId(),params);
 	}
 	
 	/**新增产品产地
