@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015-3-27 13:32:48 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="com.fruit.entity">
+    <class name="com.fruit.entity.management.UploadPicture" table="UploadPicture">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="oldName" type="java.lang.String">
+            <column name="oldName" />
+        </property>
+        <property name="newName" type="java.lang.String">
+            <column name="newName"  not-null="true"/>
+        </property>
+        <property name="createTime" type="java.util.Date">
+            <column name="createTime"  not-null="true"/>
+        </property>
+    </class>
+</hibernate-mapping>

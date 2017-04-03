@@ -7,9 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.duowan.udb.util.string.Base64;
-import com.fruit.entity.Fertilize;
-import com.fruit.entity.Irrigation;
-import com.fruit.entity.Pest;
+import com.fruit.entity.management.Fertilize;
+import com.fruit.entity.management.Irrigation;
+import com.fruit.entity.management.Pest;
 import net.sf.json.JSONArray;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletOutputStream;
 

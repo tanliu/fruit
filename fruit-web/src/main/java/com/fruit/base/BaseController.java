@@ -1,11 +1,11 @@
 package com.fruit.base;
 
-import com.fruit.entity.Company;
-import com.fruit.entity.Employee;
-import com.fruit.entity.Operationrecords;
-import com.fruit.entity.UploadPicture;
-import com.fruit.service.OperationRecordsService;
-import com.fruit.service.UploadPictureService;
+import com.fruit.entity.management.Company;
+import com.fruit.entity.management.Employee;
+import com.fruit.entity.management.Operationrecords;
+import com.fruit.entity.management.UploadPicture;
+import com.fruit.service.management.OperationRecordsService;
+import com.fruit.service.management.UploadPictureService;
 import com.fruit.utils.CompressPicUtils;
 import com.fruit.utils.ConfigProperty;
 import com.fruit.utils.MyTools;
