@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.fruit.entity.system.User" table="tb_sys_user" catalog="fruits_pre">
+        <id name="userId" type="java.lang.String">
+            <column name="user_id" length="32" />
+            <generator class="uuid.hex" />
+        </id>
+        <property name="employNo" type="java.lang.String">
+            <column name="employ_no" length="10">
+                <comment>用户编号</comment>
+            </column>
+        </property>
+        <property name="companyId" type="java.lang.String">
+            <column name="company_id" length="32">
+                <comment>公司编号</comment>
+            </column>
+        </property>
+        <property name="createTime" type="java.sql.Timestamp">
+            <column name="create_time" length="19">
+                <comment>创建时间</comment>
+            </column>
+        </property>
+        <property name="status" type="java.lang.Integer">
+            <column name="status">
+                <comment>状态 0-启用 1-禁用</comment>
+            </column>
+        </property>
+        <property name="password" type="java.lang.String">
+            <column name="password" length="50">
+                <comment>密码</comment>
+            </column>
+        </property>
+        <property name="userType" type="java.lang.String">
+            <column name="user_type" length="2">
+                <comment>用户类型</comment>
+            </column>
+        </property>
+         <set name="userRoles" inverse="false" lazy="false" cascade="delete" >
+            <key>
+                <column name="user_id" length="32">
+                    <comment>标识ID</comment>
+                </column>
+            </key>
+            <one-to-many class="com.fruit.entity.system.UserRole" />
+        </set> 
+    </class>
+</hibernate-mapping>

@@ -32,7 +32,7 @@
 	</tx:advice>
 	<!-- aop配置被事务控制的类 -->
 	<aop:config>
-		<aop:pointcut expression="bean(*ServiceImpl)" id="serviceOperation"/>
+		<aop:pointcut expression="bean(*Service*)" id="serviceOperation"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
 	</aop:config>
 	<!-- <tx:annotation-driven transaction-manager="txManager"/> -->

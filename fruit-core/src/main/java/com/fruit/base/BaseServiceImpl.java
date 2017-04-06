@@ -1,8 +1,12 @@
 package com.fruit.base;
 
 import com.fruit.utils.PageResultBean;
+import com.fruit.utils.PageUtils;
+import com.fruit.utils.QueryUtils;
 import org.hibernate.Session;
+import org.springframework.util.StringUtils;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
@@ -500,6 +504,85 @@ public class BaseServiceImpl<T> implements BaseService<T> {
     }
 
 
+    @Override
+    public void deleteObjectByIds(Serializable... ids) {
+        daoSupport.deleteObjectByIds(ids);
+    }
+
+    @Override
+    public void deleteObjectByCollection(List<T> list) {
+        daoSupport.deleteObjectByCollection(list);
+    }
+
+    @Override
+    public T findObjectById(Serializable id) {
+        return daoSupport.findObjectById(id);
+    }
+
+    @Override
+    public PageUtils getPageUtils(QueryUtils queryUtils, int pageNO,
+                                  int pageSize) {
+        return daoSupport.getPageUtils(queryUtils, pageNO, pageSize);
+    }
+
+    @Override
+    public List<T> findObjectByFields(QueryUtils queryUtils) {
+        return daoSupport.findObjectByFields(queryUtils);
+    }
+
+    @Override
+    public List<T> findObjectByFields(String[] fields,Object[] params) {
+        QueryUtils queryUtils=new QueryUtils(entityClass, "entity");
+        if(fields!=null&&fields.length>0&&params!=null&&params.length>0){
+            for(int i=0;i<fields.length;i++){
+                if(!StringUtils.isEmpty(fields[i])&&!StringUtils.isEmpty((String)(params[i]))){
+                    queryUtils.addCondition("entity."+fields[i], params[i]);
+                }
+            }
+        }
+        return daoSupport.findObjectByFields(queryUtils);
+    }
+
+    @Override
+    public List<T> findAllObject(QueryUtils queryUtils) {
+        return this.findObjectByFields(queryUtils);
+    }
+
+    @Override
+    public List<T> findAllObject() {
+        QueryUtils queryUtils=new QueryUtils(entityClass, "entity");
+        return this.findObjectByFields(queryUtils);
+    }
+
+    @Override
+    public PageUtils getPageUtils(String[] fields, Object[] params, String proterty, String order, int pageNO,
+                                  int pageSize) {
+        QueryUtils queryUtils=new QueryUtils(entityClass, "entity");
+        //添加查询条件
+        if(fields!=null&&fields.length>0&&params!=null&&params.length>0&&fields.length==params.length){
+            for(int i=0;i<fields.length;i++){
+                if(!StringUtils.isEmpty(fields[i])&&!StringUtils.isEmpty((String)(params[i]))){
+                    queryUtils.addCondition("entity."+fields[i], params[i]);
+                }
+            }
+        }
+        //添加排序
+        if(!StringUtils.isEmpty(proterty)&&!StringUtils.isEmpty(order)){
+            queryUtils.addOrderByProperty("entity."+proterty, order);
+        }
+
+        return daoSupport.getPageUtils(queryUtils, pageNO, pageSize);
+    }
+
+    @Override
+    public List<T> findAllObject(String proterty, String order) {
+        QueryUtils queryUtils=new QueryUtils(entityClass, "entity");
+        //添加排序
+        if(!StringUtils.isEmpty(proterty)&&!StringUtils.isEmpty(order)){
+            queryUtils.addOrderByProperty(proterty, order);
+        }
+        return this.findObjectByFields(queryUtils);
+    }
 
 
 //	public Integer getFindByPropertiesDateSize(Map<String, Object> map, String minDate, String maxDate) {

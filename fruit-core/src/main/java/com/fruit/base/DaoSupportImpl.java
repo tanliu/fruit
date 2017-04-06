@@ -2,6 +2,8 @@ package com.fruit.base;
 
 
 import com.fruit.utils.PageResultBean;
+import com.fruit.utils.PageUtils;
+import com.fruit.utils.QueryUtils;
 import org.hibernate.Query;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -10,7 +12,7 @@ import org.hibernate.criterion.Example;
 import org.hibernate.transform.Transformers;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collections;
 import java.util.HashMap;
@@ -42,6 +44,9 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		select_new_class= "select new "+clazz.getSimpleName();
 		update_table_t_set="update "+clazz.getSimpleName()+" t set ";
 		delete_from_table = "delete from "+clazz.getSimpleName()+" ";
+
+		ParameterizedType parameterizedType=(ParameterizedType) this.getClass().getGenericSuperclass();
+		entityClass=(Class) parameterizedType.getActualTypeArguments()[0];
 	}
 
 
@@ -501,5 +506,137 @@ public  class DaoSupportImpl<T>  implements DaoSupport<T>{
 		return getSession().createQuery(hql).list();
 	}
 
+
+	//---------------------------------------------------------
+
+
+
+	Class entityClass;
+
+
+	public Session getHibernateTemplate(){
+		return getSession();
+	}
+
+
+
+
+
+
+
+
+	@Override
+	public void deleteObjectByIds(Serializable... ids) {
+		if(ids!=null && ids.length>0){
+			for(Serializable id:ids){
+				//先查询
+				Object entity = this.findObjectById(id);
+				//再删除
+				this.getHibernateTemplate().delete(entity);
+			}
+		}
+
+
+	}
+
+	@Override
+	public void deleteObjectByCollection(List<T> list) {
+
+		for(int i=0;i<list.size();i++){
+			getSession().delete(list.get(i));
+		}
+		//getHibernateTemplate().deleteAll(list);
+
+	}
+
+	@Override
+	public T findObjectById(Serializable id) {
+		return (T) getHibernateTemplate().get(entityClass, id);
+	}
+
+	@Override
+	public PageUtils getPageUtils(QueryUtils queryUtils, int pageNO,
+								  int pageSize) {
+		//判断查询工具是否为空
+		if(queryUtils!=null){
+			//先通过语句查询一个集合
+			Query query=getSession().createQuery(queryUtils.getListQueryHql());
+			List<Object> parameters=queryUtils.getParameters();
+			if(parameters!=null){
+				int i=0;
+				for (Object param :parameters) {
+					query.setParameter(i++, param);
+				}
+			}
+
+			//获取总记录数
+			Query countquery=getSession().createQuery(queryUtils.getCountQueryHql());
+			if(parameters!=null&&parameters.size()>0){
+				int i=0;
+				for(Object object:parameters){
+					countquery.setParameter(i++, object);
+				}
+			}
+
+			//获取总页数
+			long totalCount=(Long) countquery.uniqueResult();
+			PageUtils pageUtils=new PageUtils(totalCount,pageNO, pageSize);
+			//设置分页
+			if(pageNO<1)pageNO=1; //如果分页于1时，则页码为1
+			if(pageNO>pageUtils.getTotalPageCount()){
+				pageNO=pageUtils.getTotalPageCount(); //如果页码大小最大页码时，就取最大页码
+				pageUtils.setPageNo(pageNO);
+			}
+			query.setFirstResult((pageNO-1)*pageSize);
+			query.setMaxResults(pageSize);
+			//获取分页后的数据
+			List<T> items=query.list();
+			pageUtils.setItems(items);
+			//返回一个分布工具
+			return pageUtils;
+		}
+
+		return null;
+	}
+
+	@Override
+	public List<T> findObjectByFields(QueryUtils queryUtils) {
+		Query query=getSession().createQuery(queryUtils.getListQueryHql());
+		List<Object> parameters=queryUtils.getParameters();
+		if(parameters!=null){
+			int i=0;
+			for (Object param :parameters) {
+				query.setParameter(i++, param);
+			}
+		}
+		List<T> lists=query.list();
+		if(lists.size()==0){ //当没有结果集的时候，为空
+			return null;
+		}
+		return lists;
+	}
+
+	@Override
+	public void saveOrUpdate(T entity) {
+
+		getHibernateTemplate().saveOrUpdate(entity);
+	}
+
+	@Override
+	public void saveOrUpdate(List<T> entitys) {
+		//getHibernateTemplate().saveOrUpdateAll(entitys);
+		for(int i=0;i<entitys.size();i++){
+			getSession().saveOrUpdate(entitys.get(i));
+		}
+	}
+
+	@Override
+	public void saveAll(List<T> entitys) {
+		for(int i=0;i<entitys.size();i++){
+			getSession().saveOrUpdate(entitys.get(i));
+		}
+		//getHibernateTemplate().saveOrUpdateAll(entitys);
+
+	}
 
 }

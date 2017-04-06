@@ -2,13 +2,14 @@
  * 
  */
 package com.fruit.base;
+
 import com.fruit.utils.PageUtils;
 import com.fruit.utils.QueryUtils;
 import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
@@ -24,22 +25,37 @@ import java.util.List;
  * 修改备注： 
  * @version 
  */
-public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDaos<T> {
+public class BaseDaoImpl<T>  implements BaseDaos<T> {
+
+
+
+
+
+
+
+
 	
 	Class entityClass;
-	
-	@Resource(name="sessionFactory")
-	public void setDi(SessionFactory sessionFactory){
-		this.setSessionFactory(sessionFactory);
+
+	@Autowired
+	private SessionFactory sessionFactory;
+
+	public Session getHibernateTemplate(){
+		return getSession();
 	}
-	
+
+	public Session getSession(){
+		return sessionFactory.getCurrentSession();
+	}
+
+
 	public BaseDaoImpl(){
 		ParameterizedType parameterizedType=(ParameterizedType) this.getClass().getGenericSuperclass();
 		entityClass=(Class) parameterizedType.getActualTypeArguments()[0];
 	}
 
 	
-	
+
 	@Override
 	public void save(T entity) {
 		getHibernateTemplate().save(entity);
@@ -66,7 +82,10 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDaos<T> {
 
 	@Override
 	public void deleteObjectByCollection(List<T> list) {
-		getHibernateTemplate().deleteAll(list);
+		for(int i=0;i<list.size();i++){
+			getSession().delete(list.get(i));
+		}
+		//getHibernateTemplate().deleteAll(list);
 		
 	}
 
@@ -146,13 +165,20 @@ public class BaseDaoImpl<T> extends HibernateDaoSupport implements BaseDaos<T> {
 
 	@Override
 	public void saveOrUpdate(List<T> entitys) {
-		getHibernateTemplate().saveOrUpdateAll(entitys);
+		//getHibernateTemplate().saveOrUpdateAll(entitys);
+		for(int i=0;i<entitys.size();i++){
+			getSession().saveOrUpdate(entitys.get(i));
+		}
 	}
 
 	@Override
 	public void saveAll(List<T> entitys) {
-		getHibernateTemplate().saveOrUpdateAll(entitys);
+		for(int i=0;i<entitys.size();i++){
+			getSession().saveOrUpdate(entitys.get(i));
+		}
+		//getHibernateTemplate().saveOrUpdateAll(entitys);
 		
 	}
+
 
 }
