@@ -31,7 +31,7 @@ public class Admin  extends Employee implements   java.io.Serializable {
 	/** default constructor */
 	public Admin() {
 		this.createTime = new Date();
-		this.status=0;
+
 	}
 
 	/** minimal constructor */
@@ -40,14 +40,14 @@ public class Admin  extends Employee implements   java.io.Serializable {
 				 String boss, String phone) {
 		this.company = company;
 		this.username = username;
-		this.password = password;
+
 		this.name = name;
 		this.unit = unit;
 		this.rank = rank;
 		this.job = job;
 		this.boss = boss;
 		this.phone = phone;
-		this.status=0;
+
 	}
 
 	/** full constructor */
@@ -56,7 +56,7 @@ public class Admin  extends Employee implements   java.io.Serializable {
 			String boss, String phone, String address) {
 		this.company = company;
 		this.username = username;
-		this.password = password;
+
 		this.name = name;
 		this.unit = unit;
 		this.rank = rank;
@@ -65,7 +65,6 @@ public class Admin  extends Employee implements   java.io.Serializable {
 		this.phone = phone;
 		this.address = address;
 		this.createTime = new Date();
-		this.status=0;
 	}
 
 	// Property accessors

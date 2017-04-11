@@ -3,6 +3,7 @@ package com.fruit.service.management.impl;
 import com.fruit.base.BaseServiceImpl;
 import com.fruit.dao.management.DealerDao;
 import com.fruit.entity.management.Dealer;
+import com.fruit.entity.management.Employee;
 import com.fruit.service.management.DealerService;
 import com.fruit.utils.PageResultBean;
 import com.fruit.utils.ParamTool;
@@ -10,6 +11,7 @@ import net.sf.json.JSONArray;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -41,7 +43,7 @@ public class DealerServiceImpl extends BaseServiceImpl<Dealer> implements Dealer
     */
     public String showDealers(Integer page,Integer pageSize,Integer companyid,Map<String, String> params){
 
-        Integer select_status = ParamTool.String2Integer(params.get("select_status"), -2);
+
 
 
         String select_time_begin = params.get("select_time_begin");
@@ -49,9 +51,6 @@ public class DealerServiceImpl extends BaseServiceImpl<Dealer> implements Dealer
         String search_key = params.get("search_key");
 
         StringBuffer condition = new StringBuffer();
-        if(select_status!=-2){
-            condition.append(" and t.status=").append(select_status).append(" ");
-        }
 
         if(ParamTool.notEmpty(select_time_begin)&&ParamTool.notEmpty(select_time_end)){
             condition.append(" and t.createTime >= '").append(select_time_begin).append("'  and t.createTime <='").append(select_time_end).append(" 23:59:59' ");
@@ -61,7 +60,7 @@ public class DealerServiceImpl extends BaseServiceImpl<Dealer> implements Dealer
         }
 
         StringBuffer sql = new StringBuffer();
-        sql.append("select id,name,username,phone,address,qq,email,DATE_FORMAT(contractStart, '%Y-%m-%d') contractStart,DATE_FORMAT(contractEnd, '%Y-%m-%d') contractEnd,DATE_FORMAT(createTime, '%Y-%m-%d %H:%i:%s') createTime,status");
+        sql.append("select id,name,username,phone,address,qq,email,DATE_FORMAT(contractStart, '%Y-%m-%d') contractStart,DATE_FORMAT(contractEnd, '%Y-%m-%d') contractEnd,DATE_FORMAT(createTime, '%Y-%m-%d %H:%i:%s') createTime");
         sql.append(" from dealer t  where companyId=? ");
         sql.append(condition.toString());
         sql.append(" order by createTime desc");
@@ -69,5 +68,14 @@ public class DealerServiceImpl extends BaseServiceImpl<Dealer> implements Dealer
 
         PageResultBean<Map<String, Object>> result = super.findBySql(sql.toString(), pageSize,page, companyid);
         return result.toString();
+    }
+
+    @Override
+    public Employee getEmployee(String employNo) {
+        String[] fields={"username=?"};
+        String[] params={employNo};
+        List<Dealer> dealers = findObjectByFields(fields, params);
+        Employee employee=dealers.get(0);
+        return employee;
     }
 }

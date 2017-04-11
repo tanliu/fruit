@@ -25,22 +25,20 @@ public class Farmer  extends Employee implements java.io.Serializable {
 	/** default constructor */
 	public Farmer() {
 		this.createTime = new Date();
-		this.status=0;
 	}
 
 	/** minimal constructor */
 	public Farmer(Company company, Region region,Village village, String name, String username,
-			String password, String phone, String address) {
+			 String phone, String address) {
 		this.company = company;
 		this.region=region;
 		this.village=village;
 		this.name = name;
 		this.username = username;
-		this.password = password;
 		this.phone = phone;
 		this.address = address;
 		this.createTime = new Date();
-		this.status=0;
+
 	}
 
 

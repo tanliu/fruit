@@ -2,6 +2,7 @@ package com.fruit.service.management;
 
 
 import com.fruit.base.BaseService;
+import com.fruit.entity.management.Employee;
 import com.fruit.entity.management.Qualityinspector;
 
 import java.util.Map;
@@ -25,4 +26,6 @@ public interface QualityinspectorService extends BaseService<Qualityinspector> {
 	public String getPersonDetail(Integer id);
 
     String showInspectors(Integer page, Integer pageSize, Integer companyId, Map<String, String> params);
+
+    Employee getEmployee(String employNo);
 }

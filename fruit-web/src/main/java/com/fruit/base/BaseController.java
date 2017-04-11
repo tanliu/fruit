@@ -26,7 +26,7 @@ import java.io.IOException;
 public class BaseController {
     //把所有的service都注入到这里
 
-    protected Employee me = null;
+    protected Employee employee = null;
     protected Company company=null;
 
     @Autowired
@@ -40,30 +40,41 @@ public class BaseController {
         return 1;
     }
 
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
+
     public Company getCompany(){
         Company myCompany=new Company("SJ","十记金柚","梅州梅县","介绍~~~~~","网址~~~~~","110112119","委托~~~","文件~~~");
         myCompany.setId(1);
+
+
         return myCompany;
     }
 
 
     @ModelAttribute
     public void init(HttpSession session, HttpServletRequest request) throws IOException {
-        me=(Employee)session.getAttribute("user");
-        company = (Company) session.getAttribute("company");
+  //      User user= (User) request.getSession().getAttribute("user");
+    //    employee= (Employee) request.getSession().getAttribute(user.getUserType());
+     //   company= (Company) request.getSession().getAttribute(Company.SESSIONT_NAME);
+
         if(operationrecordsService!=null&&!request.getRequestURI().equals("/tools/init")){
             String name="";
             String userName = "";
-            if(me!=null){
-                name=me.getName();
-                userName=me.getUsername();
+            if(employee !=null){
+                name= employee.getName();
+                userName= employee.getUsername();
             }
             //保存请求记录
             Operationrecords log = new Operationrecords(request.getRemoteHost(), request.getRequestURI(),
                     ParamTool.getRequestParamsLog(request.getParameterMap()), userName, name);
            // operationrecordsService.save(log);
         }
-
 
     }
 
@@ -107,7 +118,7 @@ public class BaseController {
         return sb.toString();
     }
 
-    public Employee getMe() {
-        return me;
+    public Employee getEmployee() {
+        return employee;
     }
 }

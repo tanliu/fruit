@@ -76,7 +76,6 @@ public class RoleServiceImpl extends BaseServiceImpl<Role> implements RoleServic
 
 	@Override
 	public List<RoleAuthority> getRoleAuthority(String roleId) {
-		
 		return roleDao.getRoleAuthority(roleId);
 	}
 

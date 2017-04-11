@@ -48,6 +48,8 @@ public interface UserServices extends BaseService<User> {
 	 */
 	public void deleteUser(String[] selectedRow);
 
+	User getUserByEmployNO(String employNo);
+
 	/**
 	 * 方法描述:激活与关闭的转换
 	 * @param user
@@ -68,5 +70,10 @@ public interface UserServices extends BaseService<User> {
 	 * @param selectedRow
 	 */
 	public void trueDeleteUser(String[] selectedRow);
+
+
+	void unBindUser(String employNO);
+
+	void bindUser(String employNo,String userType);
     
 }

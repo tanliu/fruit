@@ -1,7 +1,7 @@
 package com.fruit.service.management;
 
 import com.fruit.base.BaseService;
-import com.fruit.entity.management.User;
+import com.fruit.entity.management.MYUser;
 
 
 /**为UserController服务的Service
@@ -9,7 +9,7 @@ import com.fruit.entity.management.User;
  *
  */
 
-public interface UserService extends BaseService<User> {
+public interface UserService extends BaseService<MYUser> {
 
 	
 	/**获取数据库安装目录

@@ -43,7 +43,7 @@ public class FarmerController extends BaseController {
 
 
 	private Farmer getMyself(){
-		return (Farmer)getMe();
+		return (Farmer) getEmployee();
 	}
 
 	private int getMyId(){

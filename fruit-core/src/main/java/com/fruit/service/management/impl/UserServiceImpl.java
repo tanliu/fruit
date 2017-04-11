@@ -2,7 +2,7 @@ package com.fruit.service.management.impl;
 
 import com.fruit.base.BaseServiceImpl;
 import com.fruit.dao.management.UserDao;
-import com.fruit.entity.management.User;
+import com.fruit.entity.management.MYUser;
 import com.fruit.service.management.UserService;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -19,7 +19,7 @@ import java.util.List;
  * Created by TanLiu on 2017/3/21.
  */
 @Service
-public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<MYUser> implements UserService {
     UserDao userDao;
 
     @Resource(name = UserDao.DAO_NAME)

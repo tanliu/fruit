@@ -40,14 +40,14 @@ public class AuthorityDaoImpl extends DaoSupportImpl<Authority> implements Autho
 	@Override
 	public List<Authority> findAuthByAuthAndType(String condition, Integer typeMenu) {
 		String Hql="From "+Authority.class.getSimpleName()+" Where authorityId in ("+condition+") and authorityType ="+typeMenu+" order by menuNo ASC";
-		Query query = getSession().createSQLQuery(Hql);
+		Query query = getSession().createQuery(Hql);
 		return query.list();
 	}
 
 	@Override
 	public List<Authority> findUrlByAuth(String condition) {
 		String Hql="From "+Authority.class.getSimpleName()+" Where authorityId in ("+condition+")";
-		Query query = getSession().createSQLQuery(Hql);
+		Query query = getSession().createQuery(Hql);
 		return query.list();
 	}
 

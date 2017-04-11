@@ -31,7 +31,9 @@ public class RoleAuthorityDaoImpl extends DaoSupportImpl<RoleAuthority> implemen
 	@Override
 	public List<Object> findAuthorityByRoleIDs(String condition) {
 		String hql = "SELECT DISTINCT o.authorityId FROM "+RoleAuthority.class.getSimpleName()+" o WHERE 1=1 AND o.roleId IN ("+condition+")";
-		Query query = getSession().createSQLQuery(hql);
+		//String sql="SELECT DISTINCT o.authority_id FROM "+"tb_sys_role_authority"+" o WHERE 1=1 AND o.role_id IN ("+condition+")";
+		//Query query = getSession().createQuery(sql);
+		Query query =getSession().createQuery(hql);
 		return query.list();
 	}
 
@@ -40,7 +42,7 @@ public class RoleAuthorityDaoImpl extends DaoSupportImpl<RoleAuthority> implemen
 		String hql = "FROM "+RoleAuthority.class.getSimpleName()+" o "
 				+ "WHERE 1=1"
 				+ " AND o.roleId IN ("+condition+") AND o.authorityId = '"+authorityId+"'";
-		Query query = getSession().createSQLQuery(hql);
+		Query query = getSession().createQuery(hql);
 		return query.list();
 	}
 

@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 
-public class User implements java.io.Serializable {
+public class  User implements java.io.Serializable {
 
 	// Fields
 
@@ -22,12 +22,22 @@ public class User implements java.io.Serializable {
 	public static final String USER_TYPE_ADMIN="2";
 	public static final String USER_TYPE_FARMER="3";
 	public static final String USER_TYPE_INSPECTOR="4";
-/*	public static final String USER_TYPE_ROOT="1";
-	public static final String USER_TYPE_ROOT="1";*/
+	public static final String USER_TYPE_DEALERS="6";
+	public static final String USER_TYPE_LONGISTICS="5";
+    public static final String SESSION_NAME="SESSION_NAME";
+
+/*	var userTypy = {
+			"1": "超级管理员",
+			"2": "后台管理员",
+			"3": "果农",
+			"4": "质检员",
+			"5": "运输员",
+			"6": "经销商"
+}*/
 
 
 
-	public final static String SESSION_NAME="user";
+
 
 	public User() {
 	}

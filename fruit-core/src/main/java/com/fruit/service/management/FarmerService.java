@@ -1,6 +1,7 @@
 package com.fruit.service.management;
 
 import com.fruit.base.BaseService;
+import com.fruit.entity.management.Employee;
 import com.fruit.entity.management.Farmer;
 
 import java.util.List;
@@ -50,4 +51,6 @@ public interface FarmerService extends BaseService<Farmer> {
 	public void evict(Farmer farmer);
 
     String showFarmers(Integer page, Integer pageSize, Integer companyId, Map<String, String> params);
+
+    Employee getEmployee(String employNo);
 }

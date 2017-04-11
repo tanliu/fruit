@@ -1,15 +1,9 @@
 package com.fruit.filter;
 
-import java.io.IOException;
-
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 public class AllowFilter implements Filter {
 
@@ -25,7 +19,8 @@ public class AllowFilter implements Filter {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 		HttpServletResponse httpResponse = (HttpServletResponse) response;
 
-		httpResponse.setHeader("Access-Control-Allow-Origin", "*");  
+		httpResponse.setHeader("Access-Control-Allow-Origin", "*");
+		httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
 /*		String curOrigin = httpRequest.getHeader("Origin");
 		httpResponse.setHeader("Access-Control-Allow-Origin", curOrigin);
 		System.out.println("当前访问来源是："+curOrigin);*/

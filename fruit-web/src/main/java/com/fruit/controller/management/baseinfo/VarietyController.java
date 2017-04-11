@@ -1,5 +1,6 @@
 package com.fruit.controller.management.baseinfo;
 
+import com.fruit.annotation.Limit;
 import com.fruit.base.BaseController;
 import com.fruit.entity.management.Variety;
 import com.fruit.service.management.ProductinformationService;
@@ -41,6 +42,7 @@ public class VarietyController extends BaseController {
 
     /**分页返回类别列表json
      */
+    @Limit
     @ResponseBody
     @RequestMapping("/showVarieties")
     public String showVarieties(HttpServletRequest request, HttpSession session,Integer page,Integer pageSize){

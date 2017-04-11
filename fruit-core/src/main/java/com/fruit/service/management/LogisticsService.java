@@ -1,6 +1,7 @@
 package com.fruit.service.management;
 
 import com.fruit.base.BaseService;
+import com.fruit.entity.management.Employee;
 import com.fruit.entity.management.Logistics;
 
 import java.util.Map;
@@ -23,6 +24,8 @@ public interface LogisticsService extends BaseService<Logistics> {
 	public String getPersonDetail(Integer id);
 
     String showLogistics(Integer page, Integer pageSize, Integer companyId, Map<String, String> params);
+
+    Employee getEmployee(String employNo);
 
 
 //

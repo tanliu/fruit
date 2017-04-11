@@ -78,6 +78,8 @@ public class UserController extends BaseController {
         user.setEmployNo(tempUser.getEmployNo());//防止用户恶意更改用户编号
         user.setCompanyId(tempUser.getCompanyId());
         user.setCreateTime(tempUser.getCreateTime());
+        user.setStatus(tempUser.getStatus());
+        user.setUserType(tempUser.getUserType());
         user.setPassword(tempUser.getPassword());
         userServices.editorUser(user, roleIds);
 
@@ -135,6 +137,36 @@ public class UserController extends BaseController {
         }
         return result.toString();
     }
+
+    /**
+     * 方法描述:校验输入的用户编号是否已经绑帐号
+     *
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("/isBindUserID")
+    public String isBindUserID(User user) {
+        JsonResult result = new JsonResult(100, "系统用户");
+        if (user != null && !StringUtils.isEmpty(user.getEmployNo())) {
+            String[] fields = {"employNo=?"};
+            String[] params = {user.getEmployNo()};
+            List<User> users = userServices.findObjectByFields(fields, params);
+            if (users != null && users.get(0) != null) {
+                if(StringUtils.isNotBlank(users.get(0).getUserType())){
+                    result = new JsonResult(400, "此用户已经被绑定");
+                }
+
+            }else{
+                result = new JsonResult(200, "系统不存在此用户");
+            }
+        }
+        return result.toString();
+    }
+
+
+
+
+
 
 
 }

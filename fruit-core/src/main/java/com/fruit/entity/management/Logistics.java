@@ -22,7 +22,7 @@ public class Logistics extends Employee implements java.io.Serializable {
 	/** default constructor */
 	public Logistics() {
 		this.createTime = new Date();
-		this.status=0;
+
 	}
 
 	/** minimal constructor */
@@ -31,10 +31,10 @@ public class Logistics extends Employee implements java.io.Serializable {
 		this.company = company;
 		this.name = name;
 		this.username = username;
-		this.password = password;
+
 		this.phone = phone;
 		this.createTime = new Date();
-		this.status=0;
+
 	}
 
 	/** full constructor */
@@ -43,11 +43,11 @@ public class Logistics extends Employee implements java.io.Serializable {
 		this.company = company;
 		this.name = name;
 		this.username = username;
-		this.password = password;
+
 		this.phone = phone;
 		this.address = address;
 		this.createTime = new Date();
-		this.status=0;
+
 	}
 
 

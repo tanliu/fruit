@@ -2,6 +2,7 @@ package com.fruit.service.management.impl;
 
 import com.fruit.base.BaseServiceImpl;
 import com.fruit.dao.management.FarmerDao;
+import com.fruit.entity.management.Employee;
 import com.fruit.entity.management.Farmer;
 import com.fruit.service.management.FarmerService;
 import com.fruit.utils.PageResultBean;
@@ -128,7 +129,7 @@ public class FarmerServiceImpl extends BaseServiceImpl<Farmer> implements Farmer
      */
     public String showFarmers(Integer page,Integer pageSize,Integer companyid,Map<String, String> params){
 
-        Integer select_status = ParamTool.String2Integer(params.get("select_status"), -2);
+
 
 
         String select_time_begin = params.get("select_time_begin");
@@ -136,9 +137,6 @@ public class FarmerServiceImpl extends BaseServiceImpl<Farmer> implements Farmer
         String search_key = params.get("search_key");
 
         StringBuffer condition = new StringBuffer();
-        if(select_status!=-2){
-            condition.append(" and f.status=").append(select_status).append(" ");
-        }
 
         if(ParamTool.notEmpty(select_time_begin)&&ParamTool.notEmpty(select_time_end)){
             condition.append(" and f.createTime >= '").append(select_time_begin).append("'  and f.createTime <='").append(select_time_end).append(" 23:59:59' ");
@@ -148,13 +146,22 @@ public class FarmerServiceImpl extends BaseServiceImpl<Farmer> implements Farmer
         }
 
         StringBuffer sql = new StringBuffer();
-        sql.append("select f.id,f.number,f.name,f.username,f.phone,f.address,qq,email,DATE_FORMAT(contractStart, '%Y-%m-%d') contractStart,DATE_FORMAT(contractEnd, '%Y-%m-%d') contractEnd,DATE_FORMAT(f.createTime, '%Y-%m-%d %H:%i:%s') createTime,f.status,count(o.id) orchardSize from  ");
+        sql.append("select f.id,f.number,f.name,f.username,f.phone,f.address,qq,email,DATE_FORMAT(contractStart, '%Y-%m-%d') contractStart,DATE_FORMAT(contractEnd, '%Y-%m-%d') contractEnd,DATE_FORMAT(f.createTime, '%Y-%m-%d %H:%i:%s') createTime,count(o.id) orchardSize from  ");
         sql.append("( select * from farmer f where companyId=? ").append(condition.toString()).append(") f ");
         sql.append("left join orchard o on f.id=o.farmerId group by f.id order by f.createTime desc");
 
 
         PageResultBean<Map<String, Object>> result = super.findBySql(sql.toString(), pageSize,page, companyid);
         return result.toString();
+    }
+
+    @Override
+    public Employee getEmployee(String employNo) {
+        String[] fields={"username=?"};
+        String[] params={employNo};
+        List<Farmer> farmer = findObjectByFields(fields, params);
+        Employee employee=farmer.get(0);
+        return employee;
     }
 
 }

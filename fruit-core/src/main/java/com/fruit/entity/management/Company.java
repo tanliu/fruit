@@ -15,6 +15,7 @@ public class Company implements java.io.Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	// Fields
+	public static final String SESSIONT_NAME="company";
 
 	private Integer id;
 	/** 企业编号 */

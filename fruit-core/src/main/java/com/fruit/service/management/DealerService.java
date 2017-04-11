@@ -2,6 +2,7 @@ package com.fruit.service.management;
 
 import com.fruit.base.BaseService;
 import com.fruit.entity.management.Dealer;
+import com.fruit.entity.management.Employee;
 
 import java.util.Map;
 
@@ -22,4 +23,6 @@ public interface DealerService extends BaseService<Dealer> {
 
 
     String showDealers(Integer page, Integer pageSize, Integer companyId, Map<String, String> params);
+
+    Employee getEmployee(String employNo);
 }

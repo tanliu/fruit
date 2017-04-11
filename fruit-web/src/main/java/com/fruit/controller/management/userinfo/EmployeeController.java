@@ -3,9 +3,10 @@ package com.fruit.controller.management.userinfo;
 
 import com.fruit.base.BaseController;
 import com.fruit.entity.management.*;
+import com.fruit.entity.system.User;
 import com.fruit.service.management.*;
+import com.fruit.service.system.UserServices;
 import com.fruit.utils.JsonResult;
-import com.fruit.utils.MD5andKL;
 import com.fruit.utils.ParamTool;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +39,9 @@ public class EmployeeController extends BaseController {
 	@Autowired
 	DealerService dealerService;
 
+	@Autowired
+	UserServices userServices;
+
 
 
 	//------------------------------------------------企业农户信息---------------------------------------------------
@@ -63,54 +67,9 @@ public class EmployeeController extends BaseController {
 		
 		
 		
-		/**
-		 * 企业果农信息删除
-		 */
-		@ResponseBody
-		@RequestMapping(value="/farmerChangeStatus")
-		public String farmerChangeStatus(Integer id){
-			JsonResult result = new JsonResult(200, "禁用成功！");
-			Farmer farmer = farmerService.getById(id);
-			if(farmer!=null){
-				if(farmer.getStatus()==0){
-					farmer.setStatus(-1);
-				}else if(farmer.getStatus()==-1){
-					farmer.setStatus(0);
-					result.reset(200, "启用成功！");
-				}else{
-					result.reset(500, "状态出现错误，恢复为禁用状态！");
-					farmer.setStatus(-1);
-				}
-				farmerService.update(farmer);
-			}else{
-				result.reset(400, "该用户不存在");
-			}
-			
-			return result.toString();
-		}
-		
-		/**
-		 * 企业果农信息密码重置
-		 */
-		@ResponseBody
-		@RequestMapping(value="/resetFarmerPassword")
-		public String resetFarmerPassword(Integer id,String newPassword){
-			JsonResult result = new JsonResult(200, "更新成功");
-			
-			if(!ParamTool.isLegalPassword(newPassword)){
-				return result.reset(400, "密码长度要在6-18个字符之间,且只能是字母、数字和下划线");
-			}
 
-			newPassword = MD5andKL.MD5(newPassword);
-			Farmer user = farmerService.getById(id);
-			if(user==null){
-				return result.reset(400, "用户不存在！");
-			}else{
-				user.setPassword(newPassword);
-				farmerService.update(user);
-			}
-			return result.toString();
-		}
+		
+
 		
 
 		
@@ -128,10 +87,6 @@ public class EmployeeController extends BaseController {
 			if(village==null){
 				return result.reset(400, "该村庄不存在，请换一个");
 			}
-			int size = farmerService.getFindByPropertySize("username", farmer.getUsername());
-			if(size>0){
-				return result.reset(400, "用户名已经存在，请换一个");
-			}
 			Date dateStart = ParamTool.String2Date(contract_Start, "yyyy-MM-dd");
 			Date dateEnd = ParamTool.String2Date(contract_End, "yyyy-MM-dd");
 			
@@ -141,8 +96,8 @@ public class EmployeeController extends BaseController {
 			farmer.setContractEnd(dateEnd);
 			farmer.setCompany(getCompany());
 			farmer.setCreateTime(new Date());
-			farmer.setPassword(MD5andKL.MD5(farmer.getPassword()));
 			farmerService.save(farmer);
+			userServices.bindUser(farmer.getUsername(), User.USER_TYPE_FARMER);
 			
 			return result.toString();
 			
@@ -203,55 +158,7 @@ public class EmployeeController extends BaseController {
 		
 		
 		
-		/**
-		 * 企业质检人员状态修改
-		 */
-		@ResponseBody
-		@RequestMapping(value="/inspectorChangeStatus")
-		public String inspectorChangeStatus(Integer id){
-			JsonResult result = new JsonResult(200, "禁用成功！");
-			Qualityinspector user = qualityinspectorService.getById(id);
-			if(user!=null){
-				if(user.getStatus()==0){
-					user.setStatus(-1);
-				}else if(user.getStatus()==-1){
-					user.setStatus(0);
-					result.reset(200, "启用成功！");
-				}else{
-					result.reset(500, "状态出现错误，恢复为禁用状态！");
-					user.setStatus(-1);
-				}
-				qualityinspectorService.update(user);
-			}else{
-				result.reset(400, "该用户不存在");
-			}
-			
-			return result.toString();
-		}
-		
-		
-		/**
-		 * 企业质检员信息密码重置
-		 */
-		@ResponseBody
-		@RequestMapping(value="/resetInspectorPassword")
-		public String resetInspectorPassword(Integer id,String newPassword){
-			JsonResult result = new JsonResult(200, "更新成功");
-			
-			if(!ParamTool.isLegalPassword(newPassword)){
-				return result.reset(400, "密码长度要在6-18个字符之间,且只能是字母、数字和下划线");
-			}
 
-			newPassword = MD5andKL.MD5(newPassword);
-			Qualityinspector user = qualityinspectorService.getById(id);
-			if(user==null){
-				return result.reset(400, "用户不存在！");
-			}else{
-				user.setPassword(newPassword);
-				qualityinspectorService.update(user);
-			}
-			return result.toString();
-		}
 		
 		/**
 		 * 企业质检人员添加
@@ -270,9 +177,8 @@ public class EmployeeController extends BaseController {
 			user.setContractEnd(dateEnd);
 			user.setCompany(getCompany());
 			user.setCreateTime(new Date());
-			user.setPassword(MD5andKL.MD5(user.getPassword()));
 			qualityinspectorService.save(user);
-			
+			userServices.bindUser(user.getUsername(),User.USER_TYPE_INSPECTOR);
 			return result.toString();
 			
 		}
@@ -306,7 +212,6 @@ public class EmployeeController extends BaseController {
 		@ResponseBody
 		@RequestMapping(value={"/getInspectorDetail"},method=RequestMethod.POST)
 		public String getInspectorDetail(@Valid Integer id ){
-			
 			return qualityinspectorService.getPersonDetail(id);
 		}
 		
@@ -330,56 +235,7 @@ public class EmployeeController extends BaseController {
 		}
 		
 		
-		
-		/**
-		 * 企业运输员状态修改
-		 */
-		@ResponseBody
-		@RequestMapping(value="/logisticsChangeStatus")
-		public String logisticsChangeStatus(Integer id){
-			JsonResult result = new JsonResult(200, "禁用成功！");
-			Logistics user = logisticsService.getById(id);
-			if(user!=null){
-				if(user.getStatus()==0){
-					user.setStatus(-1);
-				}else if(user.getStatus()==-1){
-					user.setStatus(0);
-					result.reset(200, "启用成功！");
-				}else{
-					result.reset(500, "状态出现错误，恢复为禁用状态！");
-					user.setStatus(-1);
-				}
-				logisticsService.update(user);
-			}else{
-				result.reset(400, "该用户不存在");
-			}
-			
-			return result.toString();
-		}
-		
-		
-		/**
-		 * 企业运输员信息密码重置
-		 */
-		@ResponseBody
-		@RequestMapping(value="/resetLogisticsPassword")
-		public String resetLogisticsPassword(Integer id,String newPassword){
-			JsonResult result = new JsonResult(200, "更新成功");
-			
-			if(!ParamTool.isLegalPassword(newPassword)){
-				return result.reset(400, "密码长度要在6-18个字符之间,且只能是字母、数字和下划线");
-			}
 
-			newPassword = MD5andKL.MD5(newPassword);
-			Logistics user = logisticsService.getById(id);
-			if(user==null){
-				return result.reset(400, "用户不存在！");
-			}else{
-				user.setPassword(newPassword);
-				logisticsService.update(user);
-			}
-			return result.toString();
-		}
 		
 		/**
 		 * 企业运输员添加
@@ -398,9 +254,8 @@ public class EmployeeController extends BaseController {
 			user.setContractEnd(dateEnd);
 			user.setCompany(getCompany());
 			user.setCreateTime(new Date());
-			user.setPassword(MD5andKL.MD5(user.getPassword()));
 			logisticsService.save(user);
-			
+			userServices.bindUser(user.getUsername(),User.USER_TYPE_LONGISTICS);
 			return result.toString();
 			
 		}
@@ -460,56 +315,7 @@ public class EmployeeController extends BaseController {
 		
 		
 		
-		/**
-		 * 企业运输员状态修改
-		 */
-		@ResponseBody
-		@RequestMapping(value="/dealerChangeStatus")
-		public String dealerChangeStatus(Integer id){
-			JsonResult result = new JsonResult(200, "禁用成功！");
-			Dealer user = dealerService.getById(id);
-			if(user!=null){
-				if(user.getStatus()==0){
-					user.setStatus(-1);
-				}else if(user.getStatus()==-1){
-					user.setStatus(0);
-					result.reset(200, "启用成功！");
-				}else{
-					result.reset(500, "状态出现错误，恢复为禁用状态！");
-					user.setStatus(-1);
-				}
-				dealerService.update(user);
-			}else{
-				result.reset(400, "该用户不存在");
-			}
-			
-			return result.toString();
-		}
-		
-		
-		/**
-		 * 企业经销商信息密码重置
-		 */
-		@ResponseBody
-		@RequestMapping(value="/resetDealerPassword")
-		public String resetDealerPassword(Integer id,String newPassword){
-			JsonResult result = new JsonResult(200, "更新成功");
-			
-			if(!ParamTool.isLegalPassword(newPassword)){
-				return result.reset(400, "密码长度要在6-18个字符之间,且只能是字母、数字和下划线");
-			}
 
-			newPassword = MD5andKL.MD5(newPassword);
-			Dealer user = dealerService.getById(id);
-			if(user==null){
-				return result.reset(400, "用户不存在！");
-			}else{
-				user.setPassword(newPassword);
-				dealerService.update(user);
-			}
-			return result.toString();
-		}
-		
 		
 		/**
 		 * 企业运输员添加
@@ -528,9 +334,8 @@ public class EmployeeController extends BaseController {
 			user.setContractEnd(dateEnd);
 			user.setCompany(getCompany());
 			user.setCreateTime(new Date());
-			user.setPassword(MD5andKL.MD5(user.getPassword()));
 			dealerService.save(user);
-			
+			userServices.bindUser(user.getUsername(),User.USER_TYPE_DEALERS);
 			return result.toString();
 			
 		}
@@ -565,9 +370,9 @@ public class EmployeeController extends BaseController {
 		@ResponseBody
 		@RequestMapping(value={"/getDealerDetail"},method=RequestMethod.POST)
 		public String getDealerDetail(@Valid Integer id ){
-			
 			return dealerService.getPersonDetail(id);
 		}
 	
-	
+
+
 }

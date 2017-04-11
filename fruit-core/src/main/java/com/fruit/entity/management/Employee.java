@@ -17,8 +17,7 @@ public class Employee {
 	protected String name;
 	/** 登陆名 */
 	protected String username;
-	/** 密码 */
-	protected String password;
+
 	/** 电话 */
 	protected String phone;
 	protected String email;
@@ -30,8 +29,7 @@ public class Employee {
 	/** 图片 */
 	protected String pictures ;
 	
-	/** 帐号状态0正常，-1表示禁用 */
-	protected Integer status;
+
 	protected Date createTime;
 
 
@@ -67,13 +65,7 @@ public class Employee {
 		this.username = username;
 	}
 
-	public String getPassword() {
-		return this.password;
-	}
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
 
 	public String getPhone() {
 		return this.phone;
@@ -131,13 +123,6 @@ public class Employee {
 		this.pictures = pictures;
 	}
 
-	public Integer getStatus() {
-		return status;
-	}
-
-	public void setStatus(Integer status) {
-		this.status = status;
-	}
 
 	public Date getCreateTime() {
 		return createTime;

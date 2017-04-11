@@ -128,6 +128,18 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 	}
 
 	@Override
+	public User getUserByEmployNO(String employNo){
+		String[] fields={"employNo=?"};
+		String[] params={employNo};
+		List<User> users=findObjectByFields(fields, params);
+		if(users!=null&&users.size()>0){
+			return users.get(0);
+		}
+		return null;
+	}
+
+
+	@Override
 	public String transform(User user) {
 		String result=null;
 		user=findObjectById(user.getUserId());
@@ -147,7 +159,7 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 			return;
 		}
 		//创建用户，分配角色
-		User user= new User();
+		MYUser user= new MYUser();
 		user.setEmployNo(teacher.getEmployNo());
 		user.setEmployName(teacher.getEmployName());
 		user.setEmail(teacher.getEmail());
@@ -213,7 +225,29 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 		
 	}
 
+	@Override
+	public void unBindUser(String employNO) {
+		String[] fields={"employNo=?"};
+		String[] params={employNO};
+		List<User> users=findObjectByFields(fields, params);
+		if(users!=null&&users.size()>0){
+			User user=users.get(0);
+			user.setUserType(null);
+			update(user);
+		}
+	}
 
-	
-	
+	@Override
+	public void bindUser(String employNo, String userType) {
+		String[] fields={"employNo=?"};
+		String[] params={employNo};
+		List<User> users=findObjectByFields(fields, params);
+		if(users!=null&&users.size()>0){
+			User user=users.get(0);
+			user.setUserType(userType);
+			update(user);
+		}
+	}
+
+
 }
